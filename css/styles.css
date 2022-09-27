@@ -47,12 +47,12 @@ header {
 }
 
 .flex-basis {
-  flex-basis: calc(100%/3);
+  flex-basis: calc(100%/4);
 }
 
 .padding {
   padding: 1rem;
-  padding-left: 7rem;
+  padding-left: 6rem;
 }
 
 @media screen and (max-width: 700px) {
@@ -62,6 +62,14 @@ header {
 
   .padding {
     padding: 10px;
-    padding-left: 50px;
+    padding-left: 20px;
+  }
+
+  .column-three-fourths {
+    width: 100%;
+  }
+
+  #logo {
+    width: 65%;
   }
 }
