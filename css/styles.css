@@ -1,0 +1,75 @@
+body {
+  background-color: rgb(224 224 224);
+  font-family: Ubuntu, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+#logo {
+  width: 20%;
+}
+
+.character-name {
+  margin-left: 10px;
+  font-size: small;
+  padding-bottom: 10px;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-space-around {
+  justify-content: space-around;
+}
+
+header {
+  padding-bottom: 5rem;
+}
+
+.flexwrap {
+  flex-wrap: wrap;
+}
+
+.image {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+}
+
+.whitebackground {
+  background-color: white;
+}
+
+.borderradius {
+  border-radius: 20px;
+}
+
+.flex-basis {
+  flex-basis: calc(100%/4);
+}
+
+.padding {
+  padding: 1rem;
+  padding-left: 6rem;
+}
+
+@media screen and (max-width: 700px) {
+  .flex-basis {
+    flex-basis: calc(100%/2);
+  }
+
+  .padding {
+    padding: 10px;
+    padding-left: 20px;
+  }
+
+  .column-three-fourths {
+    width: 100%;
+  }
+
+  #logo {
+    width: 65%;
+  }
+}
