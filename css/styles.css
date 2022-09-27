@@ -1,6 +1,10 @@
 body {
   background-color: rgb(224 224 224);
-  font-family: sans-serif;
+  font-family: Ubuntu, sans-serif;
+}
+
+.hidden {
+  display: none;
 }
 
 #logo {
@@ -8,19 +12,21 @@ body {
 }
 
 .character-name {
-  margin-left: 5px;
+  margin-left: 10px;
+  font-size: small;
+  padding-bottom: 10px;
 }
 
 .justify-center {
   justify-content: center;
 }
 
-header {
-  padding-bottom: 5rem;
+.justify-space-around {
+  justify-content: space-around;
 }
 
-ul {
-  list-style: none;
+header {
+  padding-bottom: 5rem;
 }
 
 .flexwrap {
@@ -40,6 +46,22 @@ ul {
   border-radius: 20px;
 }
 
-.flexbasis {
+.flex-basis {
   flex-basis: calc(100%/3);
+}
+
+.padding {
+  padding: 1rem;
+  padding-left: 7rem;
+}
+
+@media screen and (max-width: 700px) {
+  .flex-basis {
+    flex-basis: calc(100%/2);
+  }
+
+  .padding {
+    padding: 10px;
+    padding-left: 50px;
+  }
 }

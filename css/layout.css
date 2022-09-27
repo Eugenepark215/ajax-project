@@ -16,6 +16,6 @@ header {
   width: 100%;
 }
 
-.column-third {
-  width: calc(100%/3);
+.column-three-fourths {
+  width: 75%;
 }
