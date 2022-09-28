@@ -102,6 +102,33 @@ header {
   text-align: center;
 }
 
+button {
+  border: none;
+  background-color: white;
+  font-size: x-large;
+  height: 4rem;
+  width: 100%;
+  border-top: 1px solid;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#bottom {
+  border-radius: 0 0 20px 20px;
+}
+
+#episode-directory-title {
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+#episode-list {
+  margin-left: 25%;
+  margin-top: 5%;
+}
+
 @media screen and (max-width: 700px) {
   .flex-basis {
     flex-basis: calc(100%/2);
@@ -134,5 +161,14 @@ header {
     width: 100%;
     height: 3rem;
     font-size: 15px;
+  }
+
+  .column-half {
+    width: 80%;
+  }
+
+  #episode-list {
+    margin-left: 10%;
+    margin-top: 10%;
   }
 }

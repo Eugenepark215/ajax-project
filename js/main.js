@@ -3,6 +3,12 @@ var viewCharacters = document.querySelector('#view-characters');
 var characterInformation = document.querySelector('#character-information-detail');
 var view = document.querySelectorAll('.view');
 var navbar = document.querySelector('.navbar');
+// var episodeDirectory = document.querySelector('#episode-list');
+var season1 = document.querySelector('#season1list');
+var season2 = document.querySelector('#season2list');
+var season3 = document.querySelector('#season3list');
+var season4 = document.querySelector('#season4list');
+var season5 = document.querySelector('#season5list');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://rickandmortyapi.com/api/character');
@@ -217,3 +223,103 @@ navbar.addEventListener('click', function () {
     }
   }
 });
+
+// ep1-20 (season 1 1-11) (season 2 12-20)
+var xhrEpisodePage1 = new XMLHttpRequest();
+xhrEpisodePage1.open('GET', 'https://rickandmortyapi.com/api/episode?page=1');
+xhrEpisodePage1.responseType = 'json';
+
+xhrEpisodePage1.addEventListener('load', function () {
+  for (var m = 0; m < 11; m++) {
+    var episodesRow = document.createElement('div');
+    episodesRow.setAttribute('class', 'season1 row view hidden');
+    season1.appendChild(episodesRow);
+
+    var episodes = document.createElement('p');
+    episodes.textContent = 'Episode ' + (m + 1) + ': ' + xhrEpisodePage1.response.results[m].name;
+    episodesRow.appendChild(episodes);
+  }
+  for (m = 12; m < 20; m++) {
+    episodesRow = document.createElement('div');
+    episodesRow.setAttribute('class', 'season2 row view hidden');
+    season2.appendChild(episodesRow);
+
+    episodes = document.createElement('p');
+    episodes.textContent = 'Episode ' + (m + 1) + ': ' + xhrEpisodePage1.response.results[m].name;
+    episodesRow.appendChild(episodes);
+
+  }
+});
+xhrEpisodePage1.send();
+
+// ep21-40 (season 2 21) (season 3 22-31) (season 4 32-40)
+var xhrEpisodePage2 = new XMLHttpRequest();
+xhrEpisodePage2.open('GET', 'https://rickandmortyapi.com/api/episode?page=2');
+xhrEpisodePage2.responseType = 'json';
+
+xhrEpisodePage2.addEventListener('load', function () {
+  for (var m = 0; m < 1; m++) {
+    var episodesRow = document.createElement('div');
+    episodesRow.setAttribute('class', 'season2 row view hidden');
+    season2.appendChild(episodesRow);
+
+    var episodes = document.createElement('p');
+    episodes.textContent = 'Episode ' + (m + 21) + ': ' + xhrEpisodePage2.response.results[m].name;
+    episodesRow.appendChild(episodes);
+  }
+  for (m = 1; m < 11; m++) {
+    episodesRow = document.createElement('div');
+    episodesRow.setAttribute('class', 'season3 row view hidden');
+    season3.appendChild(episodesRow);
+
+    episodes = document.createElement('p');
+    episodes.textContent = 'Episode ' + (m + 21) + ': ' + xhrEpisodePage2.response.results[m].name;
+    episodesRow.appendChild(episodes);
+  }
+  for (m = 11; m < 20; m++) {
+    episodesRow = document.createElement('div');
+    episodesRow.setAttribute('class', 'season4 row view hidden');
+    season4.appendChild(episodesRow);
+
+    episodes = document.createElement('p');
+    episodes.textContent = 'Episode ' + (m + 21) + ': ' + xhrEpisodePage2.response.results[m].name;
+    episodesRow.appendChild(episodes);
+  }
+});
+xhrEpisodePage2.send();
+
+// ep41-51 (season 4 41) (season 5 42-51)
+var xhrEpisodePage3 = new XMLHttpRequest();
+xhrEpisodePage3.open('GET', 'https://rickandmortyapi.com/api/episode?page=3');
+xhrEpisodePage3.responseType = 'json';
+
+xhrEpisodePage3.addEventListener('load', function () {
+  for (var m = 0; m < 1; m++) {
+    var episodesRow = document.createElement('div');
+    episodesRow.setAttribute('class', 'season4 row view hidden');
+    season4.appendChild(episodesRow);
+
+    var episodes = document.createElement('p');
+    episodes.textContent = 'Episode ' + (m + 41) + ': ' + xhrEpisodePage3.response.results[m].name;
+    episodesRow.appendChild(episodes);
+  }
+  for (m = 1; m < 11; m++) {
+    episodesRow = document.createElement('div');
+    episodesRow.setAttribute('class', 'season5 row view hidden');
+    season5.appendChild(episodesRow);
+
+    episodes = document.createElement('p');
+    episodes.textContent = 'Episode ' + (m + 41) + ': ' + xhrEpisodePage3.response.results[m].name;
+    episodesRow.appendChild(episodes);
+  }
+});
+xhrEpisodePage3.send();
+
+// episodeDirectory.addEventListener('click', function () {
+// if (event.target.tagName === 'BUTTON') {
+// for (var m = 0; m<button.length; m++) {
+//       if(button[m].getAttribute('id') === )
+//    }
+
+//   }
+//  })
