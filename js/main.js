@@ -1,6 +1,8 @@
 var characterList = document.querySelector('#character-list');
 var viewCharacters = document.querySelector('#view-characters');
 var characterInformation = document.querySelector('#character-information-detail');
+var view = document.querySelectorAll('.view');
+var navbar = document.querySelector('.navbar');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://rickandmortyapi.com/api/character');
@@ -30,8 +32,9 @@ xhr.addEventListener('load', function () {
 xhr.send();
 
 characterList.addEventListener('click', function () {
-  if (event.target.tagName === 'IMG') {
-    viewCharacters.setAttribute('class', 'hidden');
+  if (event.target.tagName === 'IMG' && !characterInformation.hasChildNodes()) {
+    viewCharacters.setAttribute('class', 'view hidden');
+    characterInformation.setAttribute('class', 'view active');
     for (var j = 0; j < xhr.response.results.length; j++) {
       if (xhr.response.results[j].image === event.target.src) {
         var style = document.createElement('div');
@@ -112,6 +115,104 @@ characterList.addEventListener('click', function () {
           characterEpisode.setAttribute('class', 'margin-left');
           row6.appendChild(characterEpisode);
         }
+      }
+    }
+  } else if (event.target.tagName === 'IMG' && characterInformation.hasChildNodes()) {
+    viewCharacters.setAttribute('class', 'view hidden');
+    characterInformation.setAttribute('class', 'view active');
+    for (j = 0; j < xhr.response.results.length; j++) {
+      if (xhr.response.results[j].image === event.target.src) {
+        var styleDocument = document.querySelector('#style-information');
+        var style2 = document.createElement('div');
+        style2.setAttribute('id', 'style-information');
+
+        columnFull = document.createElement('div');
+        columnFull.setAttribute('class', 'column-full whitebackground borderradius');
+        columnFull.setAttribute('id', 'column-for-information');
+        style2.appendChild(columnFull);
+
+        characterImage = document.createElement('img');
+        characterImage.setAttribute('src', xhr.response.results[j].image);
+        characterImage.setAttribute('class', 'image');
+        characterImage.setAttribute('id', 'image-for-information');
+        columnFull.appendChild(characterImage);
+
+        row1 = document.createElement('div');
+        row1.setAttribute('class', 'row justify-center');
+        columnFull.appendChild(row1);
+
+        characterName = document.createElement('h1');
+        characterName.textContent = xhr.response.results[j].name;
+        row1.appendChild(characterName);
+
+        row2 = document.createElement('div');
+        row2.setAttribute('class', 'row');
+        columnFull.appendChild(row2);
+
+        characterStatus = document.createElement('h2');
+        characterStatus.textContent = 'Status: ' + xhr.response.results[j].status;
+        characterStatus.setAttribute('class', 'margin-left');
+        row2.appendChild(characterStatus);
+
+        row3 = document.createElement('div');
+        row3.setAttribute('class', 'row');
+        columnFull.appendChild(row3);
+
+        characterSpecies = document.createElement('h2');
+        characterSpecies.textContent = 'Species: ' + xhr.response.results[j].species;
+        characterSpecies.setAttribute('class', 'margin-left');
+        row3.appendChild(characterSpecies);
+
+        row4 = document.createElement('div');
+        row4.setAttribute('class', 'row');
+        columnFull.appendChild(row4);
+
+        characterGender = document.createElement('h2');
+        characterGender.textContent = 'Gender: ' + xhr.response.results[j].gender;
+        characterGender.setAttribute('class', 'margin-left');
+        row4.appendChild(characterGender);
+
+        row5 = document.createElement('div');
+        row5.setAttribute('class', 'row');
+        columnFull.appendChild(row5);
+
+        characterLocation = document.createElement('h2');
+        characterLocation.textContent = 'Location: ' + xhr.response.results[j].location.name;
+        characterLocation.setAttribute('class', 'margin-left');
+        row5.appendChild(characterLocation);
+
+        row6 = document.createElement('div');
+        row6.setAttribute('class', 'row');
+        columnFull.appendChild(row6);
+
+        episodesText = document.createElement('h2');
+        episodesText.textContent = 'Episodes:  ';
+        episodesText.setAttribute('class', 'margin-left');
+        row6.appendChild(episodesText);
+
+        characterEpisode = document.createElement('h2');
+        for (l = 0; l < xhr.response.results[j].episode.length; l++) {
+          if (l === xhr.response.results[j].episode.length - 1) {
+            characterEpisode.textContent += xhr.response.results[j].episode[l].slice(40);
+          } else {
+            characterEpisode.textContent += xhr.response.results[j].episode[l].slice(40) + ', ';
+          }
+          characterEpisode.setAttribute('class', 'margin-left');
+          row6.appendChild(characterEpisode);
+        }
+        styleDocument.replaceWith(style2);
+      }
+    }
+  }
+});
+
+navbar.addEventListener('click', function () {
+  if (event.target.tagName === 'A') {
+    for (var k = 0; k < view.length; k++) {
+      if (event.target.getAttribute('data-view') === view[k].getAttribute('data-view')) {
+        view[k].setAttribute('class', 'view active');
+      } else {
+        view[k].setAttribute('class', 'view hidden');
       }
     }
   }

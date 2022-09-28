@@ -14,17 +14,30 @@
 </head>
 <body>
   <header>
-    <img id="logo" src="images/Rick_and_Morty.svg">
+    <div class="row justify-center flex-direction-column">
+      <img id="logo" src="images/Rick_and_Morty.svg">
+      <div class="navbar row">
+        <div class="column-third text-align">
+          <a data-view="all-characters" id="nav-character">ALL CHARACTERS</a>
+        </div>
+        <div class="column-third text-align">
+          <a data-view="episode-directory" id="nav-episode">EPISODE DIRECTORY</a>
+        </div>
+      </div>
+    </div>
   </header>
   <main>
     <div class="container">
-      <div data-view="all-characters" id="view-characters">
+      <div data-view="all-characters" id="view-characters" class="view active">
         <div class="row justify-center">
           <h1>All Characters</h1>
         </div>
         <div class="row flexwrap" id="character-list"></div>
       </div>
-      <div data-view="character-information" class="row" id="character-information-detail"></div>
+      <div data-view="character-information" id="character-information-detail" class="view"></div>
+      <div data-view="episode-directory" id="episode-directory" class="view">
+
+      </div>
     </div>
   </main>
   <script src="js/data.js"></script>
