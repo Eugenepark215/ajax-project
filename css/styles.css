@@ -55,6 +55,18 @@ header {
   padding-left: 6rem;
 }
 
+#style-information {
+  padding-left: 33%;
+}
+
+#column-for-information {
+  width: 30rem;
+}
+
+.margin-left {
+  margin-left: 10px;
+}
+
 @media screen and (max-width: 700px) {
   .flex-basis {
     flex-basis: calc(100%/2);
@@ -71,5 +83,13 @@ header {
 
   #logo {
     width: 65%;
+  }
+
+  #style-information {
+    padding-left: 10%;
+  }
+
+  #column-for-information {
+    width: 20rem;
   }
 }
