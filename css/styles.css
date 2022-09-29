@@ -159,6 +159,10 @@ button:hover {
   margin-top: 5%;
 }
 
+#portal {
+  width: 10%;
+}
+
 @media screen and (max-width: 700px) {
   .flex-basis {
     flex-basis: calc(100%/2);
@@ -201,6 +205,10 @@ button:hover {
     margin-left: 10%;
     margin-top: 10%;
   }
+
+  #portal {
+    width: 30%;
+  }
 }
 
 .row > p {
@@ -209,4 +217,9 @@ button:hover {
 
 p:hover {
   cursor: pointer;
+}
+
+.row > .portal-text {
+  text-decoration: none;
+  text-align: center;
 }

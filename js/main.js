@@ -3,8 +3,10 @@ var viewCharacters = document.querySelector('#view-characters');
 var characterInformation = document.querySelector('#character-information-detail');
 var episodeDirectory = document.querySelector('#episode-directory');
 var episodeByCharacters = document.querySelector('#characters-by-episode');
+var viewCharacterByEpisode = document.querySelector('#view-character-by-episode');
 var view = document.querySelectorAll('.view');
 var navbar = document.querySelector('.navbar');
+var portal = document.querySelector('#portal');
 
 var season1 = document.querySelector('#season1');
 var season2 = document.querySelector('#season2');
@@ -362,6 +364,7 @@ var episodeHeading = document.querySelector('#episode-heading');
 episodeDirectory.addEventListener('click', function () {
   if (event.target.tagName === 'P') {
     episodeDirectory.setAttribute('class', 'view hidden');
+    viewCharacterByEpisode.setAttribute('class', 'view active');
     episodeHeading.textContent = event.target.textContent;
     for (var i = 0; i < xhrEpisodePage1.response.results.length; i++) {
       if (xhrEpisodePage1.response.results[i].name.includes(event.target.textContent.slice(12))) {
@@ -385,4 +388,9 @@ episodeDirectory.addEventListener('click', function () {
       }
     }
   }
+});
+
+portal.addEventListener('click', function () {
+  viewCharacterByEpisode.setAttribute('class', 'view hidden');
+  viewCharacters.setAttribute('class', 'view active');
 });
