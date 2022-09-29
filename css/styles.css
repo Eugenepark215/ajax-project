@@ -203,7 +203,7 @@ button:hover {
   }
 }
 
-p {
+.row > p {
   text-decoration: underline;
 }
 

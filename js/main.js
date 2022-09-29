@@ -2,6 +2,7 @@ var characterList = document.querySelector('#character-list');
 var viewCharacters = document.querySelector('#view-characters');
 var characterInformation = document.querySelector('#character-information-detail');
 var episodeDirectory = document.querySelector('#episode-directory');
+var episodeByCharacters = document.querySelector('#characters-by-episode');
 var view = document.querySelectorAll('.view');
 var navbar = document.querySelector('.navbar');
 
@@ -226,7 +227,6 @@ navbar.addEventListener('click', function () {
   }
 });
 
-// ep1-20 (season 1 1-11) (season 2 12-20)
 var xhrEpisodePage1 = new XMLHttpRequest();
 xhrEpisodePage1.open('GET', 'https://rickandmortyapi.com/api/episode?page=1');
 xhrEpisodePage1.responseType = 'json';
@@ -254,7 +254,6 @@ xhrEpisodePage1.addEventListener('load', function () {
 });
 xhrEpisodePage1.send();
 
-// ep21-40 (season 2 21) (season 3 22-31) (season 4 32-40)
 var xhrEpisodePage2 = new XMLHttpRequest();
 xhrEpisodePage2.open('GET', 'https://rickandmortyapi.com/api/episode?page=2');
 xhrEpisodePage2.responseType = 'json';
@@ -290,7 +289,6 @@ xhrEpisodePage2.addEventListener('load', function () {
 });
 xhrEpisodePage2.send();
 
-// ep41-51 (season 4 41) (season 5 42-51)
 var xhrEpisodePage3 = new XMLHttpRequest();
 xhrEpisodePage3.open('GET', 'https://rickandmortyapi.com/api/episode?page=3');
 xhrEpisodePage3.responseType = 'json';
@@ -333,20 +331,58 @@ for (var k = 0; k < button.length; k++) {
   });
 }
 
+function createXHR(url) {
+  var newXHR = new XMLHttpRequest();
+  newXHR.open('GET', url);
+  newXHR.responseType = 'json';
+  newXHR.addEventListener('load', function () {
+    var style = document.createElement('div');
+    style.setAttribute('class', 'flex-basis justify-center padding');
+    style.setAttribute('id', 'style');
+    episodeByCharacters.appendChild(style);
+
+    var columnThreeFourths = document.createElement('div');
+    columnThreeFourths.setAttribute('class', 'column-three-fourths whitebackground borderradius');
+    style.appendChild(columnThreeFourths);
+
+    var characterImage = document.createElement('img');
+    characterImage.setAttribute('src', newXHR.response.image);
+    characterImage.setAttribute('class', 'image');
+    columnThreeFourths.appendChild(characterImage);
+
+    var characterName = document.createElement('p');
+    characterName.setAttribute('class', 'character-name');
+    characterName.textContent = newXHR.response.name;
+    columnThreeFourths.appendChild(characterName);
+  });
+  newXHR.send();
+}
+
+var episodeHeading = document.querySelector('#episode-heading');
 episodeDirectory.addEventListener('click', function () {
   if (event.target.tagName === 'P') {
     episodeDirectory.setAttribute('class', 'view hidden');
+    episodeHeading.textContent = event.target.textContent;
+    for (var i = 0; i < xhrEpisodePage1.response.results.length; i++) {
+      if (xhrEpisodePage1.response.results[i].name.includes(event.target.textContent.slice(12))) {
+        for (var j = 0; j < xhrEpisodePage1.response.results[i].characters.length; j++) {
+          createXHR(xhrEpisodePage1.response.results[i].characters[j]);
+        }
+      }
+    }
+    for (i = 0; i < xhrEpisodePage2.response.results.length; i++) {
+      if (xhrEpisodePage2.response.results[i].name.includes(event.target.textContent.slice(12))) {
+        for (j = 0; j < xhrEpisodePage2.response.results[i].characters.length; j++) {
+          createXHR(xhrEpisodePage2.response.results[i].characters[j]);
+        }
+      }
+    }
+    for (i = 0; i < xhrEpisodePage3.response.results.length; i++) {
+      if (xhrEpisodePage3.response.results[i].name.includes(event.target.textContent.slice(12))) {
+        for (j = 0; j < xhrEpisodePage3.response.results[i].characters.length; j++) {
+          createXHR(xhrEpisodePage3.response.results[i].characters[j]);
+        }
+      }
+    }
   }
 });
-
-// navbar.addEventListener('click', function () {
-//   if (event.target.tagName === 'A') {
-//     for (var k = 0; k < view.length; k++) {
-//       if (event.target.getAttribute('data-view') === view[k].getAttribute('data-view')) {
-//         view[k].setAttribute('class', 'view active');
-//       } else {
-//         view[k].setAttribute('class', 'view hidden');
-//       }
-//     }
-//   }
-// });
