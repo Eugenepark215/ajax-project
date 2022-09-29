@@ -3,12 +3,13 @@ var viewCharacters = document.querySelector('#view-characters');
 var characterInformation = document.querySelector('#character-information-detail');
 var view = document.querySelectorAll('.view');
 var navbar = document.querySelector('.navbar');
-// var episodeDirectory = document.querySelector('#episode-list');
-var season1 = document.querySelector('#season1list');
-var season2 = document.querySelector('#season2list');
-var season3 = document.querySelector('#season3list');
-var season4 = document.querySelector('#season4list');
-var season5 = document.querySelector('#season5list');
+
+var season1 = document.querySelector('#season1');
+var season2 = document.querySelector('#season2');
+var season3 = document.querySelector('#season3');
+var season4 = document.querySelector('#season4');
+var season5 = document.querySelector('#season5');
+var series = document.querySelectorAll('.series');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://rickandmortyapi.com/api/character');
@@ -232,16 +233,16 @@ xhrEpisodePage1.responseType = 'json';
 xhrEpisodePage1.addEventListener('load', function () {
   for (var m = 0; m < 11; m++) {
     var episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season1 row view hidden');
+    episodesRow.setAttribute('class', 'row');
     season1.appendChild(episodesRow);
 
     var episodes = document.createElement('p');
     episodes.textContent = 'Episode ' + (m + 1) + ': ' + xhrEpisodePage1.response.results[m].name;
     episodesRow.appendChild(episodes);
   }
-  for (m = 12; m < 20; m++) {
+  for (m = 11; m < 20; m++) {
     episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season2 row view hidden');
+    episodesRow.setAttribute('class', 'season2 row');
     season2.appendChild(episodesRow);
 
     episodes = document.createElement('p');
@@ -260,7 +261,7 @@ xhrEpisodePage2.responseType = 'json';
 xhrEpisodePage2.addEventListener('load', function () {
   for (var m = 0; m < 1; m++) {
     var episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season2 row view hidden');
+    episodesRow.setAttribute('class', 'season2 row');
     season2.appendChild(episodesRow);
 
     var episodes = document.createElement('p');
@@ -269,7 +270,7 @@ xhrEpisodePage2.addEventListener('load', function () {
   }
   for (m = 1; m < 11; m++) {
     episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season3 row view hidden');
+    episodesRow.setAttribute('class', 'season3 row');
     season3.appendChild(episodesRow);
 
     episodes = document.createElement('p');
@@ -278,7 +279,7 @@ xhrEpisodePage2.addEventListener('load', function () {
   }
   for (m = 11; m < 20; m++) {
     episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season4 row view hidden');
+    episodesRow.setAttribute('class', 'season4 row');
     season4.appendChild(episodesRow);
 
     episodes = document.createElement('p');
@@ -296,7 +297,7 @@ xhrEpisodePage3.responseType = 'json';
 xhrEpisodePage3.addEventListener('load', function () {
   for (var m = 0; m < 1; m++) {
     var episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season4 row view hidden');
+    episodesRow.setAttribute('class', 'season4 row');
     season4.appendChild(episodesRow);
 
     var episodes = document.createElement('p');
@@ -305,7 +306,7 @@ xhrEpisodePage3.addEventListener('load', function () {
   }
   for (m = 1; m < 11; m++) {
     episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season5 row view hidden');
+    episodesRow.setAttribute('class', 'season5 row');
     season5.appendChild(episodesRow);
 
     episodes = document.createElement('p');
@@ -315,11 +316,19 @@ xhrEpisodePage3.addEventListener('load', function () {
 });
 xhrEpisodePage3.send();
 
-// episodeDirectory.addEventListener('click', function () {
-// if (event.target.tagName === 'BUTTON') {
-// for (var m = 0; m<button.length; m++) {
-//       if(button[m].getAttribute('id') === )
-//    }
+// var episodeDirectory = document.querySelector('#episode-list');
+var button = document.querySelectorAll('button');
 
-//   }
-//  })
+for (var k = 0; k < button.length; k++) {
+  button[k].addEventListener('click', function () {
+    for (var j = 0; j < series.length; j++) {
+      if (series[j].className.includes(event.target.className)) {
+        series[j].setAttribute('class', 'active');
+      } else if (series[j].getAttribute('id') === event.target.className && series[j].className === 'active') {
+        series[j].setAttribute('class', 'hidden');
+      } else if (series[j].getAttribute('id') === event.target.className && series[j].className === 'hidden') {
+        series[j].setAttribute('class', 'active');
+      }
+    }
+  });
+}
