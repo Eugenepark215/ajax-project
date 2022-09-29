@@ -206,3 +206,7 @@ button:hover {
 p {
   text-decoration: underline;
 }
+
+p:hover {
+  cursor: pointer;
+}

@@ -1,6 +1,7 @@
 var characterList = document.querySelector('#character-list');
 var viewCharacters = document.querySelector('#view-characters');
 var characterInformation = document.querySelector('#character-information-detail');
+var episodeDirectory = document.querySelector('#episode-directory');
 var view = document.querySelectorAll('.view');
 var navbar = document.querySelector('.navbar');
 
@@ -316,7 +317,6 @@ xhrEpisodePage3.addEventListener('load', function () {
 });
 xhrEpisodePage3.send();
 
-// var episodeDirectory = document.querySelector('#episode-list');
 var button = document.querySelectorAll('button');
 
 for (var k = 0; k < button.length; k++) {
@@ -332,3 +332,21 @@ for (var k = 0; k < button.length; k++) {
     }
   });
 }
+
+episodeDirectory.addEventListener('click', function () {
+  if (event.target.tagName === 'P') {
+    episodeDirectory.setAttribute('class', 'view hidden');
+  }
+});
+
+// navbar.addEventListener('click', function () {
+//   if (event.target.tagName === 'A') {
+//     for (var k = 0; k < view.length; k++) {
+//       if (event.target.getAttribute('data-view') === view[k].getAttribute('data-view')) {
+//         view[k].setAttribute('class', 'view active');
+//       } else {
+//         view[k].setAttribute('class', 'view hidden');
+//       }
+//     }
+//   }
+// });
