@@ -229,93 +229,45 @@ navbar.addEventListener('click', function () {
   }
 });
 
-var xhrEpisodePage1 = new XMLHttpRequest();
-xhrEpisodePage1.open('GET', 'https://rickandmortyapi.com/api/episode?page=1');
-xhrEpisodePage1.responseType = 'json';
-
-xhrEpisodePage1.addEventListener('load', function () {
-  for (var m = 0; m < 11; m++) {
+function episodeDiv(season, xhr, start, end) {
+  for (var m = start; m < end; m++) {
     var episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'row');
-    season1.appendChild(episodesRow);
-
+    episodesRow.setAttribute('class', 'season row');
+    season.appendChild(episodesRow);
     var episodes = document.createElement('p');
-    episodes.textContent = 'Episode ' + (m + 1) + ': ' + xhrEpisodePage1.response.results[m].name;
+    episodes.textContent = 'Episode ' + xhr.response.results[m].id + ': ' + xhr.response.results[m].name;
     episodesRow.appendChild(episodes);
   }
-  for (m = 11; m < 20; m++) {
-    episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season2 row');
-    season2.appendChild(episodesRow);
+}
 
-    episodes = document.createElement('p');
-    episodes.textContent = 'Episode ' + (m + 1) + ': ' + xhrEpisodePage1.response.results[m].name;
-    episodesRow.appendChild(episodes);
+function newXHRPage(url) {
+  var newXHRPage = new XMLHttpRequest();
+  newXHRPage.open('GET', url);
+  newXHRPage.responseType = 'json';
+  newXHRPage.addEventListener('load', function () {
+    data.page.push(newXHRPage.response.results);
+    if (url === data.episodes[0]) {
+      episodeDiv(season1, newXHRPage, 0, 11);
+      episodeDiv(season2, newXHRPage, 11, 20);
+    }
+    if (url === data.episodes[1]) {
+      episodeDiv(season2, newXHRPage, 0, 1);
+      episodeDiv(season3, newXHRPage, 1, 11);
+      episodeDiv(season4, newXHRPage, 11, 20);
+    }
+    if (url === data.episodes[2]) {
+      episodeDiv(season4, newXHRPage, 0, 1);
+      episodeDiv(season5, newXHRPage, 1, 11);
+    }
+  });
+  newXHRPage.send();
+}
 
+window.addEventListener('load', function () {
+  for (var i = 0; i < data.episodes.length; i++) {
+    newXHRPage(data.episodes[i]);
   }
 });
-xhrEpisodePage1.send();
-
-var xhrEpisodePage2 = new XMLHttpRequest();
-xhrEpisodePage2.open('GET', 'https://rickandmortyapi.com/api/episode?page=2');
-xhrEpisodePage2.responseType = 'json';
-
-xhrEpisodePage2.addEventListener('load', function () {
-  for (var m = 0; m < 1; m++) {
-    var episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season2 row');
-    season2.appendChild(episodesRow);
-
-    var episodes = document.createElement('p');
-    episodes.textContent = 'Episode ' + (m + 21) + ': ' + xhrEpisodePage2.response.results[m].name;
-    episodesRow.appendChild(episodes);
-  }
-  for (m = 1; m < 11; m++) {
-    episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season3 row');
-    season3.appendChild(episodesRow);
-
-    episodes = document.createElement('p');
-    episodes.textContent = 'Episode ' + (m + 21) + ': ' + xhrEpisodePage2.response.results[m].name;
-    episodesRow.appendChild(episodes);
-  }
-  for (m = 11; m < 20; m++) {
-    episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season4 row');
-    season4.appendChild(episodesRow);
-
-    episodes = document.createElement('p');
-    episodes.textContent = 'Episode ' + (m + 21) + ': ' + xhrEpisodePage2.response.results[m].name;
-    episodesRow.appendChild(episodes);
-  }
-});
-xhrEpisodePage2.send();
-
-var xhrEpisodePage3 = new XMLHttpRequest();
-xhrEpisodePage3.open('GET', 'https://rickandmortyapi.com/api/episode?page=3');
-xhrEpisodePage3.responseType = 'json';
-
-xhrEpisodePage3.addEventListener('load', function () {
-  for (var m = 0; m < 1; m++) {
-    var episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season4 row');
-    season4.appendChild(episodesRow);
-
-    var episodes = document.createElement('p');
-    episodes.textContent = 'Episode ' + (m + 41) + ': ' + xhrEpisodePage3.response.results[m].name;
-    episodesRow.appendChild(episodes);
-  }
-  for (m = 1; m < 11; m++) {
-    episodesRow = document.createElement('div');
-    episodesRow.setAttribute('class', 'season5 row');
-    season5.appendChild(episodesRow);
-
-    episodes = document.createElement('p');
-    episodes.textContent = 'Episode ' + (m + 41) + ': ' + xhrEpisodePage3.response.results[m].name;
-    episodesRow.appendChild(episodes);
-  }
-});
-xhrEpisodePage3.send();
 
 var button = document.querySelectorAll('button');
 
@@ -323,11 +275,11 @@ for (var k = 0; k < button.length; k++) {
   button[k].addEventListener('click', function () {
     for (var j = 0; j < series.length; j++) {
       if (series[j].className.includes(event.target.className)) {
-        series[j].setAttribute('class', 'active');
-      } else if (series[j].getAttribute('id') === event.target.className && series[j].className === 'active') {
-        series[j].setAttribute('class', 'hidden');
-      } else if (series[j].getAttribute('id') === event.target.className && series[j].className === 'hidden') {
-        series[j].setAttribute('class', 'active');
+        series[j].setAttribute('class', 'season active');
+      } else if (series[j].getAttribute('id').includes(event.target.className) && series[j].className === 'active') {
+        series[j].setAttribute('class', 'season hidden');
+      } else if (series[j].getAttribute('id').includes(event.target.className) && series[j].className === 'hidden') {
+        series[j].setAttribute('class', 'season active');
       }
     }
   });
@@ -360,33 +312,24 @@ function createXHR(url) {
   newXHR.send();
 }
 
+function showEpisode(page) {
+  for (var i = 0; i < page.length; i++) {
+    if (page[i].name.includes(event.target.textContent.slice(12))) {
+      for (var j = 0; j < page[i].characters.length; j++) {
+        createXHR(page[i].characters[j]);
+      }
+    }
+  }
+}
 var episodeHeading = document.querySelector('#episode-heading');
 episodeDirectory.addEventListener('click', function () {
   if (event.target.tagName === 'P') {
     episodeDirectory.setAttribute('class', 'view hidden');
     viewCharacterByEpisode.setAttribute('class', 'view active');
     episodeHeading.textContent = event.target.textContent;
-    for (var i = 0; i < xhrEpisodePage1.response.results.length; i++) {
-      if (xhrEpisodePage1.response.results[i].name.includes(event.target.textContent.slice(12))) {
-        for (var j = 0; j < xhrEpisodePage1.response.results[i].characters.length; j++) {
-          createXHR(xhrEpisodePage1.response.results[i].characters[j]);
-        }
-      }
-    }
-    for (i = 0; i < xhrEpisodePage2.response.results.length; i++) {
-      if (xhrEpisodePage2.response.results[i].name.includes(event.target.textContent.slice(12))) {
-        for (j = 0; j < xhrEpisodePage2.response.results[i].characters.length; j++) {
-          createXHR(xhrEpisodePage2.response.results[i].characters[j]);
-        }
-      }
-    }
-    for (i = 0; i < xhrEpisodePage3.response.results.length; i++) {
-      if (xhrEpisodePage3.response.results[i].name.includes(event.target.textContent.slice(12))) {
-        for (j = 0; j < xhrEpisodePage3.response.results[i].characters.length; j++) {
-          createXHR(xhrEpisodePage3.response.results[i].characters[j]);
-        }
-      }
-    }
+    showEpisode(data.page[0]);
+    showEpisode(data.page[1]);
+    showEpisode(data.page[2]);
   }
 });
 
