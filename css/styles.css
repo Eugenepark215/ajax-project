@@ -12,12 +12,6 @@ body {
   margin-top: 2%;
 }
 
-.character-name {
-  margin-left: 10px;
-  font-size: small;
-  padding-bottom: 10px;
-}
-
 .justify-center {
   justify-content: center;
   align-items: center;
@@ -127,6 +121,11 @@ button:hover {
   text-align: center;
   background-color: rgb(240 240 240);
   width: 100%;
+  text-decoration: underline;
+}
+
+.season:hover {
+  cursor: pointer;
 }
 
 #episode-directory-title {
@@ -141,6 +140,33 @@ button:hover {
 
 #portal {
   width: 10%;
+}
+
+.fa-regular {
+  margin-top: 7%;
+}
+
+.fa-solid {
+  color: rgb(24 255 19);
+  margin-top: 7%;
+}
+
+.row > .portal-text {
+  text-decoration: none;
+  text-align: center;
+}
+
+.character-name {
+  margin-left: 10px;
+  font-size: small;
+  padding-bottom: 10px;
+  text-decoration: none;
+}
+
+#heart-information {
+  font-size: large;
+  margin-bottom: 6%;
+  margin-left: 5%;
 }
 
 @media screen and (max-width: 700px) {
@@ -189,17 +215,4 @@ button:hover {
   #portal {
     width: 30%;
   }
-}
-
-.row > p {
-  text-decoration: underline;
-}
-
-p:hover {
-  cursor: pointer;
-}
-
-.row > .portal-text {
-  text-decoration: none;
-  text-align: center;
 }
