@@ -4,7 +4,9 @@ var characterInformation = document.querySelector('#character-information-detail
 var episodeDirectory = document.querySelector('#episode-directory');
 var episodeByCharacters = document.querySelector('#characters-by-episode');
 var viewCharacterByEpisode = document.querySelector('#view-character-by-episode');
-// var bookmarks = document.querySelector('#bookmarks');
+var bookmarks = document.querySelector('#bookmarks');
+var navBookmarks = document.querySelector('#nav-bookmarks');
+var placeHolderBookmark = document.querySelector('#place-holder-bookmark');
 var view = document.querySelectorAll('.view');
 var navbar = document.querySelector('.navbar');
 var portal = document.querySelectorAll('.portal');
@@ -378,16 +380,21 @@ window.addEventListener('click', function () {
   for (var i = 0; i < portal.length; i++) {
     if (event.target.src === 'http://localhost:5500/images/sticker_2060-512x512.png') {
       viewCharacterByEpisode.setAttribute('class', 'view hidden');
-      viewCharacters.setAttribute('class', 'view active');
+      episodeDirectory.setAttribute('class', 'view active');
     }
 
   }
-
-});
-
-window.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     data.bookmarkEntries.push(event.target.closest('.flex-basis'));
     event.target.className = 'fa-solid fa-heart';
+    placeHolderBookmark.setAttribute('class', 'hidden');
+  }
+});
+
+navBookmarks.addEventListener('click', function () {
+  if (data.bookmarkEntries.length !== 0) {
+    for (var j = 0; j < data.bookmarkEntries.length; j++) {
+      bookmarks.appendChild(data.bookmarkEntries[j]);
+    }
   }
 });
