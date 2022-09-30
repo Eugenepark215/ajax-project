@@ -63,58 +63,58 @@ characterList.addEventListener('click', function () {
         characterImage.setAttribute('id', 'image-for-information');
         columnFull.appendChild(characterImage);
 
-        var row1 = document.createElement('div');
-        row1.setAttribute('class', 'row justify-center');
-        columnFull.appendChild(row1);
+        var rowName = document.createElement('div');
+        rowName.setAttribute('class', 'row justify-center');
+        columnFull.appendChild(rowName);
 
         var characterName = document.createElement('h1');
         characterName.textContent = xhr.response.results[j].name;
-        row1.appendChild(characterName);
+        rowName.appendChild(characterName);
 
-        var row2 = document.createElement('div');
-        row2.setAttribute('class', 'row');
-        columnFull.appendChild(row2);
+        var rowStatus = document.createElement('div');
+        rowStatus.setAttribute('class', 'row');
+        columnFull.appendChild(rowStatus);
 
         var characterStatus = document.createElement('h2');
         characterStatus.textContent = 'Status: ' + xhr.response.results[j].status;
         characterStatus.setAttribute('class', 'margin-left');
-        row2.appendChild(characterStatus);
+        rowStatus.appendChild(characterStatus);
 
-        var row3 = document.createElement('div');
-        row3.setAttribute('class', 'row');
-        columnFull.appendChild(row3);
+        var rowSpecies = document.createElement('div');
+        rowSpecies.setAttribute('class', 'row');
+        columnFull.appendChild(rowSpecies);
 
         var characterSpecies = document.createElement('h2');
         characterSpecies.textContent = 'Species: ' + xhr.response.results[j].species;
         characterSpecies.setAttribute('class', 'margin-left');
-        row3.appendChild(characterSpecies);
+        rowSpecies.appendChild(characterSpecies);
 
-        var row4 = document.createElement('div');
-        row4.setAttribute('class', 'row');
-        columnFull.appendChild(row4);
+        var rowGender = document.createElement('div');
+        rowGender.setAttribute('class', 'row');
+        columnFull.appendChild(rowGender);
 
         var characterGender = document.createElement('h2');
         characterGender.textContent = 'Gender: ' + xhr.response.results[j].gender;
         characterGender.setAttribute('class', 'margin-left');
-        row4.appendChild(characterGender);
+        rowGender.appendChild(characterGender);
 
-        var row5 = document.createElement('div');
-        row5.setAttribute('class', 'row');
-        columnFull.appendChild(row5);
+        var rowLocation = document.createElement('div');
+        rowLocation.setAttribute('class', 'row');
+        columnFull.appendChild(rowLocation);
 
         var characterLocation = document.createElement('h2');
         characterLocation.textContent = 'Location: ' + xhr.response.results[j].location.name;
         characterLocation.setAttribute('class', 'margin-left');
-        row5.appendChild(characterLocation);
+        rowLocation.appendChild(characterLocation);
 
-        var row6 = document.createElement('div');
-        row6.setAttribute('class', 'row');
-        columnFull.appendChild(row6);
+        var rowEpisodes = document.createElement('div');
+        rowEpisodes.setAttribute('class', 'row');
+        columnFull.appendChild(rowEpisodes);
 
         var episodesText = document.createElement('h2');
         episodesText.textContent = 'Episodes:  ';
         episodesText.setAttribute('class', 'margin-left');
-        row6.appendChild(episodesText);
+        rowEpisodes.appendChild(episodesText);
 
         var characterEpisode = document.createElement('h2');
         for (var l = 0; l < xhr.response.results[j].episode.length; l++) {
@@ -124,7 +124,7 @@ characterList.addEventListener('click', function () {
             characterEpisode.textContent += xhr.response.results[j].episode[l].slice(40) + ', ';
           }
           characterEpisode.setAttribute('class', 'margin-left');
-          row6.appendChild(characterEpisode);
+          rowEpisodes.appendChild(characterEpisode);
         }
       }
     }
@@ -134,13 +134,13 @@ characterList.addEventListener('click', function () {
     for (j = 0; j < xhr.response.results.length; j++) {
       if (xhr.response.results[j].image === event.target.src) {
         var styleDocument = document.querySelector('#style-information');
-        var style2 = document.createElement('div');
-        style2.setAttribute('id', 'style-information');
+        var styleReplace = document.createElement('div');
+        styleReplace.setAttribute('id', 'style-information');
 
         columnFull = document.createElement('div');
         columnFull.setAttribute('class', 'column-full whitebackground borderradius');
         columnFull.setAttribute('id', 'column-for-information');
-        style2.appendChild(columnFull);
+        styleReplace.appendChild(columnFull);
 
         characterImage = document.createElement('img');
         characterImage.setAttribute('src', xhr.response.results[j].image);
@@ -148,58 +148,58 @@ characterList.addEventListener('click', function () {
         characterImage.setAttribute('id', 'image-for-information');
         columnFull.appendChild(characterImage);
 
-        row1 = document.createElement('div');
-        row1.setAttribute('class', 'row justify-center');
-        columnFull.appendChild(row1);
+        rowName = document.createElement('div');
+        rowName.setAttribute('class', 'row justify-center');
+        columnFull.appendChild(rowName);
 
         characterName = document.createElement('h1');
         characterName.textContent = xhr.response.results[j].name;
-        row1.appendChild(characterName);
+        rowName.appendChild(characterName);
 
-        row2 = document.createElement('div');
-        row2.setAttribute('class', 'row');
-        columnFull.appendChild(row2);
+        rowStatus = document.createElement('div');
+        rowStatus.setAttribute('class', 'row');
+        columnFull.appendChild(rowStatus);
 
         characterStatus = document.createElement('h2');
         characterStatus.textContent = 'Status: ' + xhr.response.results[j].status;
         characterStatus.setAttribute('class', 'margin-left');
-        row2.appendChild(characterStatus);
+        rowStatus.appendChild(characterStatus);
 
-        row3 = document.createElement('div');
-        row3.setAttribute('class', 'row');
-        columnFull.appendChild(row3);
+        rowSpecies = document.createElement('div');
+        rowSpecies.setAttribute('class', 'row');
+        columnFull.appendChild(rowSpecies);
 
         characterSpecies = document.createElement('h2');
         characterSpecies.textContent = 'Species: ' + xhr.response.results[j].species;
         characterSpecies.setAttribute('class', 'margin-left');
-        row3.appendChild(characterSpecies);
+        rowSpecies.appendChild(characterSpecies);
 
-        row4 = document.createElement('div');
-        row4.setAttribute('class', 'row');
-        columnFull.appendChild(row4);
+        rowGender = document.createElement('div');
+        rowGender.setAttribute('class', 'row');
+        columnFull.appendChild(rowGender);
 
         characterGender = document.createElement('h2');
         characterGender.textContent = 'Gender: ' + xhr.response.results[j].gender;
         characterGender.setAttribute('class', 'margin-left');
-        row4.appendChild(characterGender);
+        rowGender.appendChild(characterGender);
 
-        row5 = document.createElement('div');
-        row5.setAttribute('class', 'row');
-        columnFull.appendChild(row5);
+        rowLocation = document.createElement('div');
+        rowLocation.setAttribute('class', 'row');
+        columnFull.appendChild(rowLocation);
 
         characterLocation = document.createElement('h2');
         characterLocation.textContent = 'Location: ' + xhr.response.results[j].location.name;
         characterLocation.setAttribute('class', 'margin-left');
-        row5.appendChild(characterLocation);
+        rowLocation.appendChild(characterLocation);
 
-        row6 = document.createElement('div');
-        row6.setAttribute('class', 'row');
-        columnFull.appendChild(row6);
+        rowEpisodes = document.createElement('div');
+        rowEpisodes.setAttribute('class', 'row');
+        columnFull.appendChild(rowEpisodes);
 
         episodesText = document.createElement('h2');
         episodesText.textContent = 'Episodes:  ';
         episodesText.setAttribute('class', 'margin-left');
-        row6.appendChild(episodesText);
+        rowEpisodes.appendChild(episodesText);
 
         characterEpisode = document.createElement('h2');
         for (l = 0; l < xhr.response.results[j].episode.length; l++) {
@@ -209,9 +209,9 @@ characterList.addEventListener('click', function () {
             characterEpisode.textContent += xhr.response.results[j].episode[l].slice(40) + ', ';
           }
           characterEpisode.setAttribute('class', 'margin-left');
-          row6.appendChild(characterEpisode);
+          rowEpisodes.appendChild(characterEpisode);
         }
-        styleDocument.replaceWith(style2);
+        styleDocument.replaceWith(styleReplace);
       }
     }
   }
