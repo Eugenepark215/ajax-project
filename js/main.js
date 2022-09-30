@@ -4,9 +4,10 @@ var characterInformation = document.querySelector('#character-information-detail
 var episodeDirectory = document.querySelector('#episode-directory');
 var episodeByCharacters = document.querySelector('#characters-by-episode');
 var viewCharacterByEpisode = document.querySelector('#view-character-by-episode');
+// var bookmarks = document.querySelector('#bookmarks');
 var view = document.querySelectorAll('.view');
 var navbar = document.querySelector('.navbar');
-var portal = document.querySelector('#portal');
+var portal = document.querySelectorAll('.portal');
 var season1 = document.querySelector('#season1');
 var season2 = document.querySelector('#season2');
 var season3 = document.querySelector('#season3');
@@ -373,9 +374,15 @@ episodeDirectory.addEventListener('click', function () {
   }
 });
 
-portal.addEventListener('click', function () {
-  viewCharacterByEpisode.setAttribute('class', 'view hidden');
-  viewCharacters.setAttribute('class', 'view active');
+window.addEventListener('click', function () {
+  for (var i = 0; i < portal.length; i++) {
+    if (event.target.src === 'http://localhost:5500/images/sticker_2060-512x512.png') {
+      viewCharacterByEpisode.setAttribute('class', 'view hidden');
+      viewCharacters.setAttribute('class', 'view active');
+    }
+
+  }
+
 });
 
 window.addEventListener('click', function () {
