@@ -82,12 +82,7 @@ header {
   align-items: center;
 }
 
-#nav-character:hover {
-  cursor: pointer;
-  background-color: black;
-}
-
-#nav-episode:hover {
+.nav:hover {
   cursor: pointer;
   background-color: black;
 }
@@ -138,7 +133,7 @@ button:hover {
   margin-top: 5%;
 }
 
-#portal {
+.portal {
   width: 10%;
 }
 
@@ -167,6 +162,22 @@ button:hover {
   font-size: large;
   margin-bottom: 6%;
   margin-left: 5%;
+}
+
+#portal {
+  width: 25%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+#portal-bookmark-text {
+  font-size: x-large;
+  text-align: center;
+  line-height: 1.25rem;
+}
+
+.flex-direction-row {
+  flex-direction: row;
 }
 
 @media screen and (max-width: 700px) {
@@ -213,6 +224,6 @@ button:hover {
   }
 
   #portal {
-    width: 30%;
+    width: 80%;
   }
 }

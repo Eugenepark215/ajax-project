@@ -24,10 +24,13 @@
       <img id="logo" src="images/Rick_and_Morty.svg">
       <div class="navbar row">
         <div class="column-third text-align">
-          <a data-view="all-characters" id="nav-character">ALL CHARACTERS</a>
+          <a class="nav" data-view="all-characters" id="nav-character">ALL CHARACTERS</a>
         </div>
         <div class="column-third text-align">
-          <a data-view="episode-directory" id="nav-episode">EPISODE DIRECTORY</a>
+          <a class="nav" data-view="episode-directory" id="nav-episode">EPISODE DIRECTORY</a>
+        </div>
+        <div class="column-third text-align">
+          <a class="nav" data-view="bookmarks" id="nav-bookmarks">BOOKMARKS</a>
         </div>
       </div>
     </div>
@@ -82,8 +85,19 @@
         </div>
         <div id="characters-by-episode" class="row flexwrap"></div>
         <div class="row flex-direction-column justify-center">
-          <img id="portal" src="images/sticker_2060-512x512.png">
+          <img class="portal" src="images/sticker_2060-512x512.png">
           <p class="portal-text">No characters here! <br>
+          </br>Go into the portal and get to squanching!</p>
+        </div>
+      </div>
+      <div id="view-bookmarks" data-view="bookmarks" class="view hidden">
+        <div class="row justify-center">
+          <h1>Bookmarks</h1>
+        </div>
+        <div id="bookmarks" class="row flexwrap"></div>
+        <div id="place-holder-bookmark" class="row flex-direction-column justify-center">
+          <img class="portal" id="portal" src="images/sticker_2060-512x512.png">
+          <p id="portal-bookmark-text">No characters here! <br>
           </br>Go into the portal and get to squanching!</p>
         </div>
       </div>
