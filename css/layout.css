@@ -19,3 +19,11 @@ header {
 .column-three-fourths {
   width: 75%;
 }
+
+.column-third {
+  width: calc(100%/3);
+}
+
+.column-half {
+  width: 50%;
+}
