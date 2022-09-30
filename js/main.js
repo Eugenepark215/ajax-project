@@ -7,7 +7,6 @@ var viewCharacterByEpisode = document.querySelector('#view-character-by-episode'
 var view = document.querySelectorAll('.view');
 var navbar = document.querySelector('.navbar');
 var portal = document.querySelector('#portal');
-
 var season1 = document.querySelector('#season1');
 var season2 = document.querySelector('#season2');
 var season3 = document.querySelector('#season3');
@@ -34,10 +33,18 @@ xhr.addEventListener('load', function () {
     characterImage.setAttribute('class', 'image');
     columnThreeFourths.appendChild(characterImage);
 
+    var rowNameAndHeart = document.createElement('div');
+    rowNameAndHeart.setAttribute('class', 'row justify-space-around');
+    columnThreeFourths.appendChild(rowNameAndHeart);
+
     var characterName = document.createElement('p');
     characterName.setAttribute('class', 'character-name');
     characterName.textContent = xhr.response.results[i].name;
-    columnThreeFourths.appendChild(characterName);
+    rowNameAndHeart.appendChild(characterName);
+
+    var heart = document.createElement('i');
+    heart.setAttribute('class', 'fa-regular fa-heart');
+    rowNameAndHeart.appendChild(heart);
   }
 });
 xhr.send();
@@ -70,6 +77,16 @@ characterList.addEventListener('click', function () {
         var characterName = document.createElement('h1');
         characterName.textContent = xhr.response.results[j].name;
         rowName.appendChild(characterName);
+
+        var heart = document.createElement('i');
+        heart.setAttribute('class', 'fa-regular fa-heart');
+        for (var z = 0; z < data.bookmarkEntries.length; z++) {
+          if (event.target.src === data.bookmarkEntries[z].children[0].children[0].src) {
+            heart.setAttribute('class', 'fa-solid fa-heart');
+          }
+        }
+        heart.setAttribute('id', 'heart-information');
+        rowName.appendChild(heart);
 
         var rowStatus = document.createElement('div');
         rowStatus.setAttribute('class', 'row');
@@ -155,6 +172,16 @@ characterList.addEventListener('click', function () {
         characterName = document.createElement('h1');
         characterName.textContent = xhr.response.results[j].name;
         rowName.appendChild(characterName);
+
+        heart = document.createElement('i');
+        heart.setAttribute('class', 'fa-regular fa-heart');
+        for (z = 0; z < data.bookmarkEntries.length; z++) {
+          if (event.target.src === data.bookmarkEntries[z].children[0].children[0].src) {
+            heart.setAttribute('class', 'fa-solid fa-heart');
+          }
+        }
+        heart.setAttribute('id', 'heart-information');
+        rowName.appendChild(heart);
 
         rowStatus = document.createElement('div');
         rowStatus.setAttribute('class', 'row');
@@ -304,14 +331,27 @@ function createXHR(url) {
     characterImage.setAttribute('class', 'image');
     columnThreeFourths.appendChild(characterImage);
 
+    var rowNameAndHeart = document.createElement('div');
+    rowNameAndHeart.setAttribute('class', 'row justify-space-around');
+    columnThreeFourths.appendChild(rowNameAndHeart);
+
     var characterName = document.createElement('p');
     characterName.setAttribute('class', 'character-name');
     characterName.textContent = newXHR.response.name;
-    columnThreeFourths.appendChild(characterName);
+    rowNameAndHeart.appendChild(characterName);
+
+    var heart = document.createElement('i');
+    heart.setAttribute('class', 'fa-regular fa-heart');
+    for (var z = 0; z < data.bookmarkEntries.length; z++) {
+      if (characterName.textContent === data.bookmarkEntries[z].children[0].children[1].children[0].textContent && characterImage.src === data.bookmarkEntries[z].children[0].children[0].src) {
+        heart.setAttribute('class', 'fa-solid fa-heart');
+      }
+    }
+    heart.setAttribute('id', 'heart-information');
+    rowNameAndHeart.appendChild(heart);
   });
   newXHR.send();
 }
-
 function showEpisode(page) {
   for (var i = 0; i < page.length; i++) {
     if (page[i].name.includes(event.target.textContent.slice(12))) {
@@ -336,4 +376,11 @@ episodeDirectory.addEventListener('click', function () {
 portal.addEventListener('click', function () {
   viewCharacterByEpisode.setAttribute('class', 'view hidden');
   viewCharacters.setAttribute('class', 'view active');
+});
+
+window.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    data.bookmarkEntries.push(event.target.closest('.flex-basis'));
+    event.target.className = 'fa-solid fa-heart';
+  }
 });
