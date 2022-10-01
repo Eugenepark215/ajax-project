@@ -265,7 +265,7 @@ function episodeDiv(season, xhr, start, end) {
     var episodesRow = document.createElement('div');
     episodesRow.setAttribute('class', 'season row');
     season.appendChild(episodesRow);
-    var episodes = document.createElement('p');
+    var episodes = document.createElement('a');
     episodes.textContent = 'Episode ' + xhr.response.results[m].id + ': ' + xhr.response.results[m].name;
     episodesRow.appendChild(episodes);
   }
@@ -367,7 +367,7 @@ function showEpisode(page) {
 }
 var episodeHeading = document.querySelector('#episode-heading');
 episodeDirectory.addEventListener('click', function () {
-  if (event.target.tagName === 'P') {
+  if (event.target.tagName === 'A') {
     episodeDirectory.setAttribute('class', 'view hidden');
     viewCharacterByEpisode.setAttribute('class', 'view active');
     episodeHeading.textContent = event.target.textContent;
