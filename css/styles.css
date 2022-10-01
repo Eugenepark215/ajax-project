@@ -29,7 +29,7 @@ header {
   flex-direction: column;
 }
 
-.flexwrap {
+.flex-wrap {
   flex-wrap: wrap;
 }
 
@@ -38,11 +38,11 @@ header {
   border-radius: 20px 20px 0 0;
 }
 
-.whitebackground {
+.white-background {
   background-color: white;
 }
 
-.borderradius {
+.border-radius {
   border-radius: 20px;
 }
 

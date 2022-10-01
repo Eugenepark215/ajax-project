@@ -29,7 +29,7 @@ xhr.addEventListener('load', function () {
     characterList.appendChild(style);
 
     var columnThreeFourths = document.createElement('div');
-    columnThreeFourths.setAttribute('class', 'column-three-fourths whitebackground borderradius');
+    columnThreeFourths.setAttribute('class', 'column-three-fourths white-background border-radius');
     style.appendChild(columnThreeFourths);
 
     var characterImage = document.createElement('img');
@@ -64,7 +64,7 @@ characterList.addEventListener('click', function () {
         characterInformation.appendChild(style);
 
         var columnFull = document.createElement('div');
-        columnFull.setAttribute('class', 'column-full whitebackground borderradius');
+        columnFull.setAttribute('class', 'column-full white-background border-radius');
         columnFull.setAttribute('id', 'column-for-information');
         style.appendChild(columnFull);
 
@@ -159,7 +159,7 @@ characterList.addEventListener('click', function () {
         styleReplace.setAttribute('id', 'style-information');
 
         columnFull = document.createElement('div');
-        columnFull.setAttribute('class', 'column-full whitebackground borderradius');
+        columnFull.setAttribute('class', 'column-full white-background border-radius');
         columnFull.setAttribute('id', 'column-for-information');
         styleReplace.appendChild(columnFull);
 
@@ -305,12 +305,10 @@ var button = document.querySelectorAll('button');
 for (var k = 0; k < button.length; k++) {
   button[k].addEventListener('click', function () {
     for (var j = 0; j < series.length; j++) {
-      if (series[j].className.includes(event.target.className)) {
-        series[j].setAttribute('class', 'season active');
-      } else if (series[j].getAttribute('id').includes(event.target.className) && series[j].className === 'active') {
-        series[j].setAttribute('class', 'season hidden');
-      } else if (series[j].getAttribute('id').includes(event.target.className) && series[j].className === 'hidden') {
-        series[j].setAttribute('class', 'season active');
+      if (series[j].getAttribute('id').includes(event.target.className) && series[j].className.includes('active')) {
+        series[j].setAttribute('class', event.target.className + ' season series hidden');
+      } else if (series[j].getAttribute('id').includes(event.target.className) && series[j].className.includes('hidden')) {
+        series[j].setAttribute('class', event.target.className + ' season series active');
       }
     }
   });
@@ -327,7 +325,7 @@ function createXHR(url) {
     episodeByCharacters.appendChild(style);
 
     var columnThreeFourths = document.createElement('div');
-    columnThreeFourths.setAttribute('class', 'column-three-fourths whitebackground borderradius');
+    columnThreeFourths.setAttribute('class', 'column-three-fourths white-background border-radius');
     style.appendChild(columnThreeFourths);
 
     var characterImage = document.createElement('img');
