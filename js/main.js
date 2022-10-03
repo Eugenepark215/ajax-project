@@ -319,14 +319,14 @@ function createXHR(url) {
   newXHR.open('GET', url);
   newXHR.responseType = 'json';
   newXHR.addEventListener('load', function () {
-    var style = document.createElement('div');
-    style.setAttribute('class', 'flex-basis justify-center padding');
-    style.setAttribute('id', 'style');
-    episodeByCharacters.appendChild(style);
+    var styleDocument = document.createElement('div');
+    styleDocument.setAttribute('class', 'flex-basis justify-center padding');
+    styleDocument.setAttribute('id', 'style');
+    episodeByCharacters.appendChild(styleDocument);
 
     var columnThreeFourths = document.createElement('div');
     columnThreeFourths.setAttribute('class', 'column-three-fourths white-background border-radius');
-    style.appendChild(columnThreeFourths);
+    styleDocument.appendChild(columnThreeFourths);
 
     var characterImage = document.createElement('img');
     characterImage.setAttribute('src', newXHR.response.image);
@@ -354,6 +354,7 @@ function createXHR(url) {
   });
   newXHR.send();
 }
+
 function showEpisode(page) {
   for (var i = 0; i < page.length; i++) {
     if (page[i].name.includes(event.target.textContent.slice(12))) {
@@ -384,8 +385,12 @@ window.addEventListener('click', function () {
     }
 
   }
-  if (event.target.tagName === 'I') {
+  if (event.target.tagName === 'I' && event.target.closest('.flex-basis') !== null) {
     data.bookmarkEntries.push(event.target.closest('.flex-basis'));
+    event.target.className = 'fa-solid fa-heart';
+    placeHolderBookmark.setAttribute('class', 'hidden');
+  } else if (event.target.tagName === 'I' && event.target.closest('#style-information') !== null) {
+    data.bookmarkEntries.push(event.target.closest('#style-information'));
     event.target.className = 'fa-solid fa-heart';
     placeHolderBookmark.setAttribute('class', 'hidden');
   }
@@ -394,6 +399,9 @@ window.addEventListener('click', function () {
 navBookmarks.addEventListener('click', function () {
   if (data.bookmarkEntries.length !== 0) {
     for (var j = 0; j < data.bookmarkEntries.length; j++) {
+      //       if (data.bookmarkEntries[j].getAttribute('#id') === 'style-information') {
+      // bookmarks.appendChild()
+      // }
       bookmarks.appendChild(data.bookmarkEntries[j]);
     }
   }
