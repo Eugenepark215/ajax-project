@@ -658,3 +658,198 @@ episodeByCharacters.addEventListener('click', function () {
     }
   }
 });
+
+bookmarks.addEventListener('click', function () {
+  if (event.target.tagName === 'IMG' && !characterInformation.hasChildNodes()) {
+    viewBookmarks.setAttribute('class', 'view hidden');
+    characterInformation.setAttribute('class', 'view active');
+    for (var j = 0; j < data.bookmarkEntries.length; j++) {
+      if (data.bookmarkEntries[j].image === event.target.src) {
+        var style = document.createElement('div');
+        style.setAttribute('id', 'style-information');
+        characterInformation.appendChild(style);
+
+        var columnFull = document.createElement('div');
+        columnFull.setAttribute('class', 'column-full white-background border-radius');
+        columnFull.setAttribute('id', 'column-for-information');
+        style.appendChild(columnFull);
+
+        var characterImage = document.createElement('img');
+        characterImage.setAttribute('src', data.bookmarkEntries[j].image);
+        characterImage.setAttribute('class', 'image');
+        characterImage.setAttribute('id', 'image-for-information');
+        columnFull.appendChild(characterImage);
+
+        var rowName = document.createElement('div');
+        rowName.setAttribute('class', 'row justify-center');
+        columnFull.appendChild(rowName);
+
+        var characterName = document.createElement('h1');
+        characterName.textContent = data.bookmarkEntries[j].name;
+        rowName.appendChild(characterName);
+
+        var heart = document.createElement('i');
+        heart.setAttribute('class', 'fa-regular fa-heart');
+        for (var z = 0; z < data.bookmarkEntries.length; z++) {
+          if (event.target.src === data.bookmarkEntries[z].image) {
+            heart.setAttribute('class', 'fa-solid fa-heart');
+          }
+        }
+        heart.setAttribute('id', 'heart-information');
+        rowName.appendChild(heart);
+
+        var rowStatus = document.createElement('div');
+        rowStatus.setAttribute('class', 'row');
+        columnFull.appendChild(rowStatus);
+
+        var characterStatus = document.createElement('h2');
+        characterStatus.textContent = 'Status: ' + data.bookmarkEntries[j].status;
+        characterStatus.setAttribute('class', 'margin-left');
+        rowStatus.appendChild(characterStatus);
+
+        var rowSpecies = document.createElement('div');
+        rowSpecies.setAttribute('class', 'row');
+        columnFull.appendChild(rowSpecies);
+
+        var characterSpecies = document.createElement('h2');
+        characterSpecies.textContent = 'Species: ' + data.bookmarkEntries[j].species;
+        characterSpecies.setAttribute('class', 'margin-left');
+        rowSpecies.appendChild(characterSpecies);
+
+        var rowGender = document.createElement('div');
+        rowGender.setAttribute('class', 'row');
+        columnFull.appendChild(rowGender);
+
+        var characterGender = document.createElement('h2');
+        characterGender.textContent = 'Gender: ' + data.bookmarkEntries[j].gender;
+        characterGender.setAttribute('class', 'margin-left');
+        rowGender.appendChild(characterGender);
+
+        var rowLocation = document.createElement('div');
+        rowLocation.setAttribute('class', 'row');
+        columnFull.appendChild(rowLocation);
+
+        var characterLocation = document.createElement('h2');
+        characterLocation.textContent = 'Location: ' + data.bookmarkEntries[j].location.name;
+        characterLocation.setAttribute('class', 'margin-left');
+        rowLocation.appendChild(characterLocation);
+
+        var rowEpisodes = document.createElement('div');
+        rowEpisodes.setAttribute('class', 'row');
+        columnFull.appendChild(rowEpisodes);
+
+        var episodesText = document.createElement('h2');
+        episodesText.textContent = 'Episodes:  ';
+        episodesText.setAttribute('class', 'margin-left');
+        rowEpisodes.appendChild(episodesText);
+
+        var characterEpisode = document.createElement('h2');
+        for (var l = 0; l < data.bookmarkEntries[j].episode.length; l++) {
+          if (l === data.bookmarkEntries[j].episode.length - 1) {
+            characterEpisode.textContent += data.bookmarkEntries[j].episode[l].slice(40);
+          } else {
+            characterEpisode.textContent += data.bookmarkEntries[j].episode[l].slice(40) + ', ';
+          }
+          characterEpisode.setAttribute('class', 'margin-left');
+          rowEpisodes.appendChild(characterEpisode);
+        }
+      }
+    }
+  } else if (event.target.tagName === 'IMG' && characterInformation.hasChildNodes()) {
+    viewBookmarks.setAttribute('class', 'view hidden');
+    characterInformation.setAttribute('class', 'view active');
+    for (j = 0; j < data.bookmarkEntries.length; j++) {
+      if (data.bookmarkEntries[j].image === event.target.src) {
+        var styleDocument = document.querySelector('#style-information');
+        var styleReplace = document.createElement('div');
+        styleReplace.setAttribute('id', 'style-information');
+
+        columnFull = document.createElement('div');
+        columnFull.setAttribute('class', 'column-full white-background border-radius');
+        columnFull.setAttribute('id', 'column-for-information');
+        styleReplace.appendChild(columnFull);
+
+        characterImage = document.createElement('img');
+        characterImage.setAttribute('src', data.bookmarkEntries[j].image);
+        characterImage.setAttribute('class', 'image');
+        characterImage.setAttribute('id', 'image-for-information');
+        columnFull.appendChild(characterImage);
+
+        rowName = document.createElement('div');
+        rowName.setAttribute('class', 'row justify-center');
+        columnFull.appendChild(rowName);
+
+        characterName = document.createElement('h1');
+        characterName.textContent = data.bookmarkEntries[j].name;
+        rowName.appendChild(characterName);
+
+        heart = document.createElement('i');
+        heart.setAttribute('class', 'fa-regular fa-heart');
+        for (z = 0; z < data.bookmarkEntries.length; z++) {
+          if (event.target.src === data.bookmarkEntries[z].image) {
+            heart.setAttribute('class', 'fa-solid fa-heart');
+          }
+        }
+        heart.setAttribute('id', 'heart-information');
+        rowName.appendChild(heart);
+
+        rowStatus = document.createElement('div');
+        rowStatus.setAttribute('class', 'row');
+        columnFull.appendChild(rowStatus);
+
+        characterStatus = document.createElement('h2');
+        characterStatus.textContent = 'Status: ' + data.bookmarkEntries[j].status;
+        characterStatus.setAttribute('class', 'margin-left');
+        rowStatus.appendChild(characterStatus);
+
+        rowSpecies = document.createElement('div');
+        rowSpecies.setAttribute('class', 'row');
+        columnFull.appendChild(rowSpecies);
+
+        characterSpecies = document.createElement('h2');
+        characterSpecies.textContent = 'Species: ' + data.bookmarkEntries[j].species;
+        characterSpecies.setAttribute('class', 'margin-left');
+        rowSpecies.appendChild(characterSpecies);
+
+        rowGender = document.createElement('div');
+        rowGender.setAttribute('class', 'row');
+        columnFull.appendChild(rowGender);
+
+        characterGender = document.createElement('h2');
+        characterGender.textContent = 'Gender: ' + data.bookmarkEntries[j].gender;
+        characterGender.setAttribute('class', 'margin-left');
+        rowGender.appendChild(characterGender);
+
+        rowLocation = document.createElement('div');
+        rowLocation.setAttribute('class', 'row');
+        columnFull.appendChild(rowLocation);
+
+        characterLocation = document.createElement('h2');
+        characterLocation.textContent = 'Location: ' + data.bookmarkEntries[j].location.name;
+        characterLocation.setAttribute('class', 'margin-left');
+        rowLocation.appendChild(characterLocation);
+
+        rowEpisodes = document.createElement('div');
+        rowEpisodes.setAttribute('class', 'row');
+        columnFull.appendChild(rowEpisodes);
+
+        episodesText = document.createElement('h2');
+        episodesText.textContent = 'Episodes:  ';
+        episodesText.setAttribute('class', 'margin-left');
+        rowEpisodes.appendChild(episodesText);
+
+        characterEpisode = document.createElement('h2');
+        for (l = 0; l < data.bookmarkEntries[j].episode.length; l++) {
+          if (l === data.bookmarkEntries[j].episode.length - 1) {
+            characterEpisode.textContent += data.bookmarkEntries[j].episode[l].slice(40);
+          } else {
+            characterEpisode.textContent += data.bookmarkEntries[j].episode[l].slice(40) + ', ';
+          }
+          characterEpisode.setAttribute('class', 'margin-left');
+          rowEpisodes.appendChild(characterEpisode);
+        }
+        styleDocument.replaceWith(styleReplace);
+      }
+    }
+  }
+});
