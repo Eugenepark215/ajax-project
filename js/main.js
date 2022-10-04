@@ -385,15 +385,20 @@ window.addEventListener('click', function () {
     }
 
   }
+  var allCharacters = document.querySelectorAll('.all-characters');
   if (event.target.tagName === 'I' && event.target.closest('.flex-basis') !== null) {
     data.bookmarkEntries.push(event.target.closest('.flex-basis'));
     event.target.className = 'fa-solid fa-heart';
     placeHolderBookmark.setAttribute('class', 'hidden');
+    for (var l = 0; l < allCharacters.length; l++) {
+      if (allCharacters[l].children[0].children[0].src === event.target.closest('.flex-basis').children[0].children[0].src) {
+        allCharacters[l].children[0].children[1].children[1].setAttribute('class', 'fa-solid fa-heart');
+      }
+    }
   } else if (event.target.tagName === 'I' && event.target.closest('#style-information') !== null) {
     data.bookmarkEntries.push(event.target.closest('#style-information'));
     event.target.className = 'fa-solid fa-heart';
     placeHolderBookmark.setAttribute('class', 'hidden');
-    var allCharacters = document.querySelectorAll('.all-characters');
     for (var k = 0; k < allCharacters.length; k++) {
       if (allCharacters[k].children[0].children[0].src === event.target.closest('#style-information').children[0].children[0].src) {
         allCharacters[k].children[0].children[1].children[1].setAttribute('class', 'fa-solid fa-heart');
