@@ -1,11 +1,7 @@
 /* exported data */
-
 var data = {
   view: 'all-characters',
   episodesPages: [],
-  bookmarkEntries: []
+  bookmarkEntries: [],
+  charactersByEpisodes: []
 };
-
-// function characterInfo(eventListenerTarget, dataView, xhr, ) {
-
-// }
