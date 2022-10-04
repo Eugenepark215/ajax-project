@@ -6,3 +6,7 @@ var data = {
   page: [],
   bookmarkEntries: []
 };
+
+// function characterInfo(eventListenerTarget, dataView, xhr, ) {
+
+// }

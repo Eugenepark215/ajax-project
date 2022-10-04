@@ -358,6 +358,7 @@ function createXHR(url) {
 function showEpisode(page) {
   for (var i = 0; i < page.length; i++) {
     if (page[i].name.includes(event.target.textContent.slice(12))) {
+      episodeByCharacters.innerHTML = '';
       for (var j = 0; j < page[i].characters.length; j++) {
         createXHR(page[i].characters[j]);
       }
@@ -365,6 +366,7 @@ function showEpisode(page) {
   }
 }
 var episodeHeading = document.querySelector('#episode-heading');
+
 episodeDirectory.addEventListener('click', function () {
   if (event.target.tagName === 'A') {
     episodeDirectory.setAttribute('class', 'view hidden');
