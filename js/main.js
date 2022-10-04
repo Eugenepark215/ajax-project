@@ -25,7 +25,7 @@ xhr.responseType = 'json';
 xhr.addEventListener('load', function () {
   for (var i = 0; i < xhr.response.results.length; i++) {
     var style = document.createElement('div');
-    style.setAttribute('class', 'flex-basis justify-center padding');
+    style.setAttribute('class', 'all-characters flex-basis justify-center padding');
     characterList.appendChild(style);
 
     var columnThreeFourths = document.createElement('div');
@@ -393,6 +393,12 @@ window.addEventListener('click', function () {
     data.bookmarkEntries.push(event.target.closest('#style-information'));
     event.target.className = 'fa-solid fa-heart';
     placeHolderBookmark.setAttribute('class', 'hidden');
+    var allCharacters = document.querySelectorAll('.all-characters');
+    for (var k = 0; k < allCharacters.length; k++) {
+      if (allCharacters[k].children[0].children[0].src === event.target.closest('#style-information').children[0].children[0].src) {
+        allCharacters[k].children[0].children[1].children[1].setAttribute('class', 'fa-solid fa-heart');
+      }
+    }
   }
 });
 
