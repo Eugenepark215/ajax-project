@@ -63,6 +63,7 @@ characterList.addEventListener('click', function () {
     characterInformation.setAttribute('class', 'view active');
     for (var j = 0; j < xhr.response.results.length; j++) {
       if (xhr.response.results[j].image === event.target.src) {
+        var characterObject = xhr.response.results[j];
         var style = document.createElement('div');
         style.setAttribute('id', 'style-information');
         characterInformation.appendChild(style);
@@ -89,10 +90,13 @@ characterList.addEventListener('click', function () {
         var heart = document.createElement('i');
         heart.setAttribute('class', 'fa-regular fa-heart');
         for (var z = 0; z < data.bookmarkEntries.length; z++) {
-          if (event.target.src === data.bookmarkEntries[z].children[0].children[0].src) {
+          if (event.target.src === data.bookmarkEntries[z].image) {
             heart.setAttribute('class', 'fa-solid fa-heart');
           }
         }
+        heart.addEventListener('click', function () {
+          data.bookmarkEntries.push(characterObject);
+        });
         heart.setAttribute('id', 'heart-information');
         rowName.appendChild(heart);
 
@@ -158,6 +162,7 @@ characterList.addEventListener('click', function () {
     characterInformation.setAttribute('class', 'view active');
     for (j = 0; j < xhr.response.results.length; j++) {
       if (xhr.response.results[j].image === event.target.src) {
+        characterObject = xhr.response.results[j];
         var styleDocument = document.querySelector('#style-information');
         var styleReplace = document.createElement('div');
         styleReplace.setAttribute('id', 'style-information');
@@ -184,10 +189,13 @@ characterList.addEventListener('click', function () {
         heart = document.createElement('i');
         heart.setAttribute('class', 'fa-regular fa-heart');
         for (z = 0; z < data.bookmarkEntries.length; z++) {
-          if (event.target.src === data.bookmarkEntries[z].children[0].children[0].src) {
+          if (event.target.src === data.bookmarkEntries[z].image) {
             heart.setAttribute('class', 'fa-solid fa-heart');
           }
         }
+        heart.addEventListener('click', function () {
+          data.bookmarkEntries.push(characterObject);
+        });
         heart.setAttribute('id', 'heart-information');
         rowName.appendChild(heart);
 
