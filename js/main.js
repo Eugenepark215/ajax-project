@@ -24,6 +24,7 @@ xhr.responseType = 'json';
 
 xhr.addEventListener('load', function () {
   for (var i = 0; i < xhr.response.results.length; i++) {
+    const characterObject = xhr.response.results[i];
     var style = document.createElement('div');
     style.setAttribute('class', 'all-characters flex-basis justify-center padding');
     characterList.appendChild(style);
@@ -48,6 +49,9 @@ xhr.addEventListener('load', function () {
 
     var heart = document.createElement('i');
     heart.setAttribute('class', 'fa-regular fa-heart');
+    heart.addEventListener('click', function () {
+      data.bookmarkEntries.push(characterObject);
+    });
     rowNameAndHeart.appendChild(heart);
   }
 });
@@ -319,6 +323,7 @@ function createXHR(url) {
   newXHR.open('GET', url);
   newXHR.responseType = 'json';
   newXHR.addEventListener('load', function () {
+    var characterObject = newXHR.response;
     var styleDocument = document.createElement('div');
     styleDocument.setAttribute('class', 'flex-basis justify-center padding');
     styleDocument.setAttribute('id', 'style');
@@ -345,12 +350,16 @@ function createXHR(url) {
     var heart = document.createElement('i');
     heart.setAttribute('class', 'fa-regular fa-heart');
     for (var z = 0; z < data.bookmarkEntries.length; z++) {
-      if (characterName.textContent === data.bookmarkEntries[z].children[0].children[1].children[0].textContent && characterImage.src === data.bookmarkEntries[z].children[0].children[0].src) {
+      if (characterName.textContent === data.bookmarkEntries[z].name && characterImage.src === data.bookmarkEntries[z].image) {
         heart.setAttribute('class', 'fa-solid fa-heart');
       }
     }
+    heart.addEventListener('click', function () {
+      data.bookmarkEntries.push(characterObject);
+    });
     heart.setAttribute('id', 'heart-information');
     rowNameAndHeart.appendChild(heart);
+    // }
   });
   newXHR.send();
 }
@@ -389,7 +398,6 @@ window.addEventListener('click', function () {
   }
   var allCharacters = document.querySelectorAll('.all-characters');
   if (event.target.tagName === 'I' && event.target.closest('.flex-basis') !== null) {
-    data.bookmarkEntries.push(event.target.closest('.flex-basis'));
     event.target.className = 'fa-solid fa-heart';
     placeHolderBookmark.setAttribute('class', 'hidden');
     for (var l = 0; l < allCharacters.length; l++) {
@@ -398,7 +406,6 @@ window.addEventListener('click', function () {
       }
     }
   } else if (event.target.tagName === 'I' && event.target.closest('#style-information') !== null) {
-    data.bookmarkEntries.push(event.target.closest('#style-information'));
     event.target.className = 'fa-solid fa-heart';
     placeHolderBookmark.setAttribute('class', 'hidden');
     for (var k = 0; k < allCharacters.length; k++) {
@@ -410,12 +417,33 @@ window.addEventListener('click', function () {
 });
 
 navBookmarks.addEventListener('click', function () {
-  if (data.bookmarkEntries.length !== 0) {
-    for (var j = 0; j < data.bookmarkEntries.length; j++) {
-      //       if (data.bookmarkEntries[j].getAttribute('#id') === 'style-information') {
-      // bookmarks.appendChild()
-      // }
-      bookmarks.appendChild(data.bookmarkEntries[j]);
-    }
+  bookmarks.innerHTML = '';
+  for (var j = 0; j < data.bookmarkEntries.length; j++) {
+    var style = document.createElement('div');
+    style.setAttribute('class', 'all-characters flex-basis justify-center padding');
+    characterList.appendChild(style);
+
+    var columnThreeFourths = document.createElement('div');
+    columnThreeFourths.setAttribute('class', 'column-three-fourths white-background border-radius');
+    style.appendChild(columnThreeFourths);
+
+    var characterImage = document.createElement('img');
+    characterImage.setAttribute('src', data.bookmarkEntries[j].image);
+    characterImage.setAttribute('class', 'image');
+    columnThreeFourths.appendChild(characterImage);
+
+    var rowNameAndHeart = document.createElement('div');
+    rowNameAndHeart.setAttribute('class', 'row justify-space-around');
+    columnThreeFourths.appendChild(rowNameAndHeart);
+
+    var characterName = document.createElement('p');
+    characterName.setAttribute('class', 'character-name');
+    characterName.textContent = data.bookmarkEntries[j].name;
+    rowNameAndHeart.appendChild(characterName);
+
+    var heart = document.createElement('i');
+    heart.setAttribute('class', 'fa-solid fa-heart');
+    rowNameAndHeart.appendChild(heart);
+    bookmarks.appendChild(style);
   }
 });
