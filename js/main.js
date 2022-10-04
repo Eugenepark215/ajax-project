@@ -271,32 +271,32 @@ function episodeDiv(season, xhr, start, end) {
   }
 }
 
-function newXHRPage(url) {
+function loadAndShowEpisodeList(url, index) {
   var newXHRPage = new XMLHttpRequest();
   newXHRPage.open('GET', url);
   newXHRPage.responseType = 'json';
   newXHRPage.addEventListener('load', function () {
-    data.page.push(newXHRPage.response.results);
-    if (url === data.episodes[0]) {
+    data.episodesPages.push(newXHRPage.response.results);
+    if (index === 0) {
       episodeDiv(season1, newXHRPage, 0, 11);
       episodeDiv(season2, newXHRPage, 11, 20);
     }
-    if (url === data.episodes[1]) {
+    if (index === 1) {
       episodeDiv(season2, newXHRPage, 0, 1);
       episodeDiv(season3, newXHRPage, 1, 11);
       episodeDiv(season4, newXHRPage, 11, 20);
     }
-    if (url === data.episodes[2]) {
+    if (index === 2) {
       episodeDiv(season4, newXHRPage, 0, 1);
       episodeDiv(season5, newXHRPage, 1, 11);
     }
   });
   newXHRPage.send();
 }
-
+var episodePagesURL = ['https://rickandmortyapi.com/api/episode?page=1', 'https://rickandmortyapi.com/api/episode?page=2', 'https://rickandmortyapi.com/api/episode?page=3'];
 window.addEventListener('load', function () {
-  for (var i = 0; i < data.episodes.length; i++) {
-    newXHRPage(data.episodes[i]);
+  for (var i = 0; i < episodePagesURL.length; i++) {
+    loadAndShowEpisodeList(episodePagesURL[i], i);
   }
 });
 
@@ -372,9 +372,9 @@ episodeDirectory.addEventListener('click', function () {
     episodeDirectory.setAttribute('class', 'view hidden');
     viewCharacterByEpisode.setAttribute('class', 'view active');
     episodeHeading.textContent = event.target.textContent;
-    showEpisode(data.page[0]);
-    showEpisode(data.page[1]);
-    showEpisode(data.page[2]);
+    showEpisode(data.episodesPages[0]);
+    showEpisode(data.episodesPages[1]);
+    showEpisode(data.episodesPages[2]);
   }
 });
 
