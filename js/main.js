@@ -22,9 +22,9 @@ var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://rickandmortyapi.com/api/character');
 xhr.responseType = 'json';
 
-function createCharacterImageCard(xhr, element, classSelector, columnType, heartClassSelector) {
-  for (var i = 0; i < xhr.length; i++) {
-    const characterObject = xhr[i];
+function createCharacterImageCard(characterData, element, classSelector, columnType, heartClassSelector) {
+  for (var i = 0; i < characterData.length; i++) {
+    const characterObject = characterData[i];
     var style = document.createElement('div');
     style.setAttribute('class', classSelector);
     element.appendChild(style);
@@ -34,7 +34,7 @@ function createCharacterImageCard(xhr, element, classSelector, columnType, heart
     style.appendChild(column);
 
     var characterImage = document.createElement('img');
-    characterImage.setAttribute('src', xhr[i].image);
+    characterImage.setAttribute('src', characterData[i].image);
     characterImage.setAttribute('class', 'image');
     column.appendChild(characterImage);
 
@@ -43,7 +43,7 @@ function createCharacterImageCard(xhr, element, classSelector, columnType, heart
     column.appendChild(rowNameAndHeart);
     var characterName = document.createElement('p');
     characterName.setAttribute('class', 'character-name');
-    characterName.textContent = xhr[i].name;
+    characterName.textContent = characterData[i].name;
     rowNameAndHeart.appendChild(characterName);
 
     var heart = document.createElement('i');
@@ -60,12 +60,12 @@ xhr.addEventListener('load', function () {
 });
 xhr.send();
 
-function characterInformationReturn(dataView, xhr) {
+function characterInformationReturn(dataView, characterData) {
   if (event.target.tagName === 'IMG' && !characterInformation.hasChildNodes()) {
     dataView.setAttribute('class', 'view hidden');
     characterInformation.setAttribute('class', 'view active');
-    for (var j = 0; j < xhr.length; j++) {
-      if (xhr[j].image === event.target.src) {
+    for (var j = 0; j < characterData.length; j++) {
+      if (characterData[j].image === event.target.src) {
         var characterObject = xhr[j];
         var style = document.createElement('div');
         style.setAttribute('id', 'style-information');
@@ -77,7 +77,7 @@ function characterInformationReturn(dataView, xhr) {
         style.appendChild(columnFull);
 
         var characterImage = document.createElement('img');
-        characterImage.setAttribute('src', xhr[j].image);
+        characterImage.setAttribute('src', characterData[j].image);
         characterImage.setAttribute('class', 'image');
         characterImage.setAttribute('id', 'image-for-information');
         columnFull.appendChild(characterImage);
@@ -87,7 +87,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowName);
 
         var characterName = document.createElement('h1');
-        characterName.textContent = xhr[j].name;
+        characterName.textContent = characterData[j].name;
         rowName.appendChild(characterName);
 
         var heart = document.createElement('i');
@@ -108,7 +108,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowStatus);
 
         var characterStatus = document.createElement('h2');
-        characterStatus.textContent = 'Status: ' + xhr[j].status;
+        characterStatus.textContent = 'Status: ' + characterData[j].status;
         characterStatus.setAttribute('class', 'margin-left');
         rowStatus.appendChild(characterStatus);
 
@@ -117,7 +117,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowSpecies);
 
         var characterSpecies = document.createElement('h2');
-        characterSpecies.textContent = 'Species: ' + xhr[j].species;
+        characterSpecies.textContent = 'Species: ' + characterData[j].species;
         characterSpecies.setAttribute('class', 'margin-left');
         rowSpecies.appendChild(characterSpecies);
 
@@ -126,7 +126,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowGender);
 
         var characterGender = document.createElement('h2');
-        characterGender.textContent = 'Gender: ' + xhr[j].gender;
+        characterGender.textContent = 'Gender: ' + characterData[j].gender;
         characterGender.setAttribute('class', 'margin-left');
         rowGender.appendChild(characterGender);
 
@@ -135,7 +135,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowLocation);
 
         var characterLocation = document.createElement('h2');
-        characterLocation.textContent = 'Location: ' + xhr[j].location.name;
+        characterLocation.textContent = 'Location: ' + characterData[j].location.name;
         characterLocation.setAttribute('class', 'margin-left');
         rowLocation.appendChild(characterLocation);
 
@@ -150,10 +150,10 @@ function characterInformationReturn(dataView, xhr) {
 
         var characterEpisode = document.createElement('h2');
         for (var l = 0; l < xhr[j].episode.length; l++) {
-          if (l === xhr[j].episode.length - 1) {
-            characterEpisode.textContent += xhr[j].episode[l].slice(40);
+          if (l === characterData[j].episode.length - 1) {
+            characterEpisode.textContent += characterData[j].episode[l].slice(40);
           } else {
-            characterEpisode.textContent += xhr[j].episode[l].slice(40) + ', ';
+            characterEpisode.textContent += characterData[j].episode[l].slice(40) + ', ';
           }
           characterEpisode.setAttribute('class', 'margin-left');
           rowEpisodes.appendChild(characterEpisode);
@@ -163,9 +163,9 @@ function characterInformationReturn(dataView, xhr) {
   } else if (event.target.tagName === 'IMG' && characterInformation.hasChildNodes()) {
     dataView.setAttribute('class', 'view hidden');
     characterInformation.setAttribute('class', 'view active');
-    for (j = 0; j < xhr.length; j++) {
-      if (xhr[j].image === event.target.src) {
-        characterObject = xhr[j];
+    for (j = 0; j < characterData.length; j++) {
+      if (characterData[j].image === event.target.src) {
+        characterObject = characterData[j];
         var styleDocument = document.querySelector('#style-information');
         var styleReplace = document.createElement('div');
         styleReplace.setAttribute('id', 'style-information');
@@ -176,7 +176,7 @@ function characterInformationReturn(dataView, xhr) {
         styleReplace.appendChild(columnFull);
 
         characterImage = document.createElement('img');
-        characterImage.setAttribute('src', xhr[j].image);
+        characterImage.setAttribute('src', characterData[j].image);
         characterImage.setAttribute('class', 'image');
         characterImage.setAttribute('id', 'image-for-information');
         columnFull.appendChild(characterImage);
@@ -186,7 +186,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowName);
 
         characterName = document.createElement('h1');
-        characterName.textContent = xhr[j].name;
+        characterName.textContent = characterData[j].name;
         rowName.appendChild(characterName);
 
         heart = document.createElement('i');
@@ -207,7 +207,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowStatus);
 
         characterStatus = document.createElement('h2');
-        characterStatus.textContent = 'Status: ' + xhr[j].status;
+        characterStatus.textContent = 'Status: ' + characterData[j].status;
         characterStatus.setAttribute('class', 'margin-left');
         rowStatus.appendChild(characterStatus);
 
@@ -216,7 +216,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowSpecies);
 
         characterSpecies = document.createElement('h2');
-        characterSpecies.textContent = 'Species: ' + xhr[j].species;
+        characterSpecies.textContent = 'Species: ' + characterData[j].species;
         characterSpecies.setAttribute('class', 'margin-left');
         rowSpecies.appendChild(characterSpecies);
 
@@ -225,7 +225,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowGender);
 
         characterGender = document.createElement('h2');
-        characterGender.textContent = 'Gender: ' + xhr[j].gender;
+        characterGender.textContent = 'Gender: ' + characterData[j].gender;
         characterGender.setAttribute('class', 'margin-left');
         rowGender.appendChild(characterGender);
 
@@ -234,7 +234,7 @@ function characterInformationReturn(dataView, xhr) {
         columnFull.appendChild(rowLocation);
 
         characterLocation = document.createElement('h2');
-        characterLocation.textContent = 'Location: ' + xhr[j].location.name;
+        characterLocation.textContent = 'Location: ' + characterData[j].location.name;
         characterLocation.setAttribute('class', 'margin-left');
         rowLocation.appendChild(characterLocation);
 
@@ -248,11 +248,11 @@ function characterInformationReturn(dataView, xhr) {
         rowEpisodes.appendChild(episodesText);
 
         characterEpisode = document.createElement('h2');
-        for (l = 0; l < xhr[j].episode.length; l++) {
-          if (l === xhr[j].episode.length - 1) {
-            characterEpisode.textContent += xhr[j].episode[l].slice(40);
+        for (l = 0; l < characterData[j].episode.length; l++) {
+          if (l === characterData[j].episode.length - 1) {
+            characterEpisode.textContent += characterData[j].episode[l].slice(40);
           } else {
-            characterEpisode.textContent += xhr[j].episode[l].slice(40) + ', ';
+            characterEpisode.textContent += characterData[j].episode[l].slice(40) + ', ';
           }
           characterEpisode.setAttribute('class', 'margin-left');
           rowEpisodes.appendChild(characterEpisode);
@@ -279,13 +279,13 @@ navbar.addEventListener('click', function () {
   }
 });
 
-function episodeDiv(season, xhr, start, end) {
+function episodeDiv(season, characterData, start, end) {
   for (var m = start; m < end; m++) {
     var episodesRow = document.createElement('div');
     episodesRow.setAttribute('class', 'season row');
     season.appendChild(episodesRow);
     var episodes = document.createElement('a');
-    episodes.textContent = 'Episode ' + xhr.response.results[m].id + ': ' + xhr.response.results[m].name;
+    episodes.textContent = 'Episode ' + characterData.response.results[m].id + ': ' + characterData.response.results[m].name;
     episodesRow.appendChild(episodes);
   }
 }
