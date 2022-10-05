@@ -22,249 +22,247 @@ var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://rickandmortyapi.com/api/character');
 xhr.responseType = 'json';
 
-function createCharacterImageCard(characterData, element, classSelector, columnType, heartClassSelector) {
-  for (var i = 0; i < characterData.length; i++) {
-    const characterObject = characterData[i];
-    var style = document.createElement('div');
-    style.setAttribute('class', classSelector);
-    element.appendChild(style);
+function createCharacterImageCard(xhrResponse, element, classSelector, columnType, heartClassSelector) {
+  const characterObject = xhrResponse;
+  var style = document.createElement('div');
+  style.setAttribute('class', classSelector);
+  element.appendChild(style);
 
-    var column = document.createElement('div');
-    column.setAttribute('class', columnType + ' white-background border-radius');
-    style.appendChild(column);
+  var column = document.createElement('div');
+  column.setAttribute('class', columnType + ' white-background border-radius');
+  style.appendChild(column);
 
-    var characterImage = document.createElement('img');
-    characterImage.setAttribute('src', characterData[i].image);
-    characterImage.setAttribute('class', 'image');
-    column.appendChild(characterImage);
+  var characterImage = document.createElement('img');
+  characterImage.setAttribute('src', xhrResponse.image);
+  characterImage.setAttribute('class', 'image');
+  column.appendChild(characterImage);
 
-    var rowNameAndHeart = document.createElement('div');
-    rowNameAndHeart.setAttribute('class', 'row justify-space-around');
-    column.appendChild(rowNameAndHeart);
-    var characterName = document.createElement('p');
-    characterName.setAttribute('class', 'character-name');
-    characterName.textContent = characterData[i].name;
-    rowNameAndHeart.appendChild(characterName);
+  var rowNameAndHeart = document.createElement('div');
+  rowNameAndHeart.setAttribute('class', 'row justify-space-around');
+  column.appendChild(rowNameAndHeart);
+  var characterName = document.createElement('p');
+  characterName.setAttribute('class', 'character-name');
+  characterName.textContent = xhrResponse.name;
+  rowNameAndHeart.appendChild(characterName);
 
-    var heart = document.createElement('i');
-    heart.setAttribute('class', heartClassSelector);
-    heart.addEventListener('click', function () {
-      data.bookmarkEntries.push(characterObject);
-    });
-    rowNameAndHeart.appendChild(heart);
-  }
+  var heart = document.createElement('i');
+  heart.setAttribute('class', heartClassSelector);
+  heart.addEventListener('click', function () {
+    data.bookmarkEntries.push(characterObject);
+  });
+  rowNameAndHeart.appendChild(heart);
 }
 
 xhr.addEventListener('load', function () {
-  createCharacterImageCard(xhr.response.results, characterList, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-regular fa-heart');
+  for (var i = 0; i < xhr.response.results.length; i++) {
+    createCharacterImageCard(xhr.response.results[i], characterList, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-regular fa-heart');
+  }
 });
 xhr.send();
 
-function characterInformationReturn(dataView, characterData) {
+function characterInformationReturn(dataView, xhrResponse) {
   if (event.target.tagName === 'IMG' && !characterInformation.hasChildNodes()) {
     dataView.setAttribute('class', 'view hidden');
     characterInformation.setAttribute('class', 'view active');
-    for (var j = 0; j < characterData.length; j++) {
-      if (characterData[j].image === event.target.src) {
-        var characterObject = xhr[j];
-        var style = document.createElement('div');
-        style.setAttribute('id', 'style-information');
-        characterInformation.appendChild(style);
+    if (xhrResponse.image === event.target.src) {
+      var characterObject = xhrResponse;
+      var style = document.createElement('div');
+      style.setAttribute('id', 'style-information');
+      characterInformation.appendChild(style);
 
-        var columnFull = document.createElement('div');
-        columnFull.setAttribute('class', 'column-full white-background border-radius');
-        columnFull.setAttribute('id', 'column-for-information');
-        style.appendChild(columnFull);
+      var columnFull = document.createElement('div');
+      columnFull.setAttribute('class', 'column-full white-background border-radius');
+      columnFull.setAttribute('id', 'column-for-information');
+      style.appendChild(columnFull);
 
-        var characterImage = document.createElement('img');
-        characterImage.setAttribute('src', characterData[j].image);
-        characterImage.setAttribute('class', 'image');
-        characterImage.setAttribute('id', 'image-for-information');
-        columnFull.appendChild(characterImage);
+      var characterImage = document.createElement('img');
+      characterImage.setAttribute('src', xhrResponse.image);
+      characterImage.setAttribute('class', 'image');
+      characterImage.setAttribute('id', 'image-for-information');
+      columnFull.appendChild(characterImage);
 
-        var rowName = document.createElement('div');
-        rowName.setAttribute('class', 'row justify-center');
-        columnFull.appendChild(rowName);
+      var rowName = document.createElement('div');
+      rowName.setAttribute('class', 'row justify-center');
+      columnFull.appendChild(rowName);
 
-        var characterName = document.createElement('h1');
-        characterName.textContent = characterData[j].name;
-        rowName.appendChild(characterName);
+      var characterName = document.createElement('h1');
+      characterName.textContent = xhrResponse.name;
+      rowName.appendChild(characterName);
 
-        var heart = document.createElement('i');
-        heart.setAttribute('class', 'fa-regular fa-heart');
-        for (var z = 0; z < data.bookmarkEntries.length; z++) {
-          if (event.target.src === data.bookmarkEntries[z].image) {
-            heart.setAttribute('class', 'fa-solid fa-heart');
-          }
+      var heart = document.createElement('i');
+      heart.setAttribute('class', 'fa-regular fa-heart');
+      for (var z = 0; z < data.bookmarkEntries.length; z++) {
+        if (event.target.src === data.bookmarkEntries[z].image) {
+          heart.setAttribute('class', 'fa-solid fa-heart');
         }
-        heart.addEventListener('click', function () {
-          data.bookmarkEntries.push(characterObject);
-        });
-        heart.setAttribute('id', 'heart-information');
-        rowName.appendChild(heart);
+      }
+      heart.addEventListener('click', function () {
+        data.bookmarkEntries.push(characterObject);
+      });
+      heart.setAttribute('id', 'heart-information');
+      rowName.appendChild(heart);
 
-        var rowStatus = document.createElement('div');
-        rowStatus.setAttribute('class', 'row');
-        columnFull.appendChild(rowStatus);
+      var rowStatus = document.createElement('div');
+      rowStatus.setAttribute('class', 'row');
+      columnFull.appendChild(rowStatus);
 
-        var characterStatus = document.createElement('h2');
-        characterStatus.textContent = 'Status: ' + characterData[j].status;
-        characterStatus.setAttribute('class', 'margin-left');
-        rowStatus.appendChild(characterStatus);
+      var characterStatus = document.createElement('h2');
+      characterStatus.textContent = 'Status: ' + xhrResponse.status;
+      characterStatus.setAttribute('class', 'margin-left');
+      rowStatus.appendChild(characterStatus);
 
-        var rowSpecies = document.createElement('div');
-        rowSpecies.setAttribute('class', 'row');
-        columnFull.appendChild(rowSpecies);
+      var rowSpecies = document.createElement('div');
+      rowSpecies.setAttribute('class', 'row');
+      columnFull.appendChild(rowSpecies);
 
-        var characterSpecies = document.createElement('h2');
-        characterSpecies.textContent = 'Species: ' + characterData[j].species;
-        characterSpecies.setAttribute('class', 'margin-left');
-        rowSpecies.appendChild(characterSpecies);
+      var characterSpecies = document.createElement('h2');
+      characterSpecies.textContent = 'Species: ' + xhrResponse.species;
+      characterSpecies.setAttribute('class', 'margin-left');
+      rowSpecies.appendChild(characterSpecies);
 
-        var rowGender = document.createElement('div');
-        rowGender.setAttribute('class', 'row');
-        columnFull.appendChild(rowGender);
+      var rowGender = document.createElement('div');
+      rowGender.setAttribute('class', 'row');
+      columnFull.appendChild(rowGender);
 
-        var characterGender = document.createElement('h2');
-        characterGender.textContent = 'Gender: ' + characterData[j].gender;
-        characterGender.setAttribute('class', 'margin-left');
-        rowGender.appendChild(characterGender);
+      var characterGender = document.createElement('h2');
+      characterGender.textContent = 'Gender: ' + xhrResponse.gender;
+      characterGender.setAttribute('class', 'margin-left');
+      rowGender.appendChild(characterGender);
 
-        var rowLocation = document.createElement('div');
-        rowLocation.setAttribute('class', 'row');
-        columnFull.appendChild(rowLocation);
+      var rowLocation = document.createElement('div');
+      rowLocation.setAttribute('class', 'row');
+      columnFull.appendChild(rowLocation);
 
-        var characterLocation = document.createElement('h2');
-        characterLocation.textContent = 'Location: ' + characterData[j].location.name;
-        characterLocation.setAttribute('class', 'margin-left');
-        rowLocation.appendChild(characterLocation);
+      var characterLocation = document.createElement('h2');
+      characterLocation.textContent = 'Location: ' + xhrResponse.location.name;
+      characterLocation.setAttribute('class', 'margin-left');
+      rowLocation.appendChild(characterLocation);
 
-        var rowEpisodes = document.createElement('div');
-        rowEpisodes.setAttribute('class', 'row');
-        columnFull.appendChild(rowEpisodes);
+      var rowEpisodes = document.createElement('div');
+      rowEpisodes.setAttribute('class', 'row');
+      columnFull.appendChild(rowEpisodes);
 
-        var episodesText = document.createElement('h2');
-        episodesText.textContent = 'Episodes:  ';
-        episodesText.setAttribute('class', 'margin-left');
-        rowEpisodes.appendChild(episodesText);
+      var episodesText = document.createElement('h2');
+      episodesText.textContent = 'Episodes:  ';
+      episodesText.setAttribute('class', 'margin-left');
+      rowEpisodes.appendChild(episodesText);
 
-        var characterEpisode = document.createElement('h2');
-        for (var l = 0; l < xhr[j].episode.length; l++) {
-          if (l === characterData[j].episode.length - 1) {
-            characterEpisode.textContent += characterData[j].episode[l].slice(40);
-          } else {
-            characterEpisode.textContent += characterData[j].episode[l].slice(40) + ', ';
-          }
-          characterEpisode.setAttribute('class', 'margin-left');
-          rowEpisodes.appendChild(characterEpisode);
+      var characterEpisode = document.createElement('h2');
+      for (var l = 0; l < xhrResponse.episode.length; l++) {
+        if (l === xhrResponse.episode.length - 1) {
+          characterEpisode.textContent += xhrResponse.episode[l].slice(40);
+        } else {
+          characterEpisode.textContent += xhrResponse.episode[l].slice(40) + ', ';
         }
+        characterEpisode.setAttribute('class', 'margin-left');
+        rowEpisodes.appendChild(characterEpisode);
       }
     }
   } else if (event.target.tagName === 'IMG' && characterInformation.hasChildNodes()) {
     dataView.setAttribute('class', 'view hidden');
     characterInformation.setAttribute('class', 'view active');
-    for (j = 0; j < characterData.length; j++) {
-      if (characterData[j].image === event.target.src) {
-        characterObject = characterData[j];
-        var styleDocument = document.querySelector('#style-information');
-        var styleReplace = document.createElement('div');
-        styleReplace.setAttribute('id', 'style-information');
+    if (xhrResponse.image === event.target.src) {
+      characterObject = xhrResponse;
+      var styleDocument = document.querySelector('#style-information');
+      var styleReplace = document.createElement('div');
+      styleReplace.setAttribute('id', 'style-information');
 
-        columnFull = document.createElement('div');
-        columnFull.setAttribute('class', 'column-full white-background border-radius');
-        columnFull.setAttribute('id', 'column-for-information');
-        styleReplace.appendChild(columnFull);
+      columnFull = document.createElement('div');
+      columnFull.setAttribute('class', 'column-full white-background border-radius');
+      columnFull.setAttribute('id', 'column-for-information');
+      styleReplace.appendChild(columnFull);
 
-        characterImage = document.createElement('img');
-        characterImage.setAttribute('src', characterData[j].image);
-        characterImage.setAttribute('class', 'image');
-        characterImage.setAttribute('id', 'image-for-information');
-        columnFull.appendChild(characterImage);
+      characterImage = document.createElement('img');
+      characterImage.setAttribute('src', xhrResponse.image);
+      characterImage.setAttribute('class', 'image');
+      characterImage.setAttribute('id', 'image-for-information');
+      columnFull.appendChild(characterImage);
 
-        rowName = document.createElement('div');
-        rowName.setAttribute('class', 'row justify-center');
-        columnFull.appendChild(rowName);
+      rowName = document.createElement('div');
+      rowName.setAttribute('class', 'row justify-center');
+      columnFull.appendChild(rowName);
 
-        characterName = document.createElement('h1');
-        characterName.textContent = characterData[j].name;
-        rowName.appendChild(characterName);
+      characterName = document.createElement('h1');
+      characterName.textContent = xhrResponse.name;
+      rowName.appendChild(characterName);
 
-        heart = document.createElement('i');
-        heart.setAttribute('class', 'fa-regular fa-heart');
-        for (z = 0; z < data.bookmarkEntries.length; z++) {
-          if (event.target.src === data.bookmarkEntries[z].image) {
-            heart.setAttribute('class', 'fa-solid fa-heart');
-          }
+      heart = document.createElement('i');
+      heart.setAttribute('class', 'fa-regular fa-heart');
+      for (z = 0; z < data.bookmarkEntries.length; z++) {
+        if (event.target.src === data.bookmarkEntries[z].image) {
+          heart.setAttribute('class', 'fa-solid fa-heart');
         }
-        heart.addEventListener('click', function () {
-          data.bookmarkEntries.push(characterObject);
-        });
-        heart.setAttribute('id', 'heart-information');
-        rowName.appendChild(heart);
-
-        rowStatus = document.createElement('div');
-        rowStatus.setAttribute('class', 'row');
-        columnFull.appendChild(rowStatus);
-
-        characterStatus = document.createElement('h2');
-        characterStatus.textContent = 'Status: ' + characterData[j].status;
-        characterStatus.setAttribute('class', 'margin-left');
-        rowStatus.appendChild(characterStatus);
-
-        rowSpecies = document.createElement('div');
-        rowSpecies.setAttribute('class', 'row');
-        columnFull.appendChild(rowSpecies);
-
-        characterSpecies = document.createElement('h2');
-        characterSpecies.textContent = 'Species: ' + characterData[j].species;
-        characterSpecies.setAttribute('class', 'margin-left');
-        rowSpecies.appendChild(characterSpecies);
-
-        rowGender = document.createElement('div');
-        rowGender.setAttribute('class', 'row');
-        columnFull.appendChild(rowGender);
-
-        characterGender = document.createElement('h2');
-        characterGender.textContent = 'Gender: ' + characterData[j].gender;
-        characterGender.setAttribute('class', 'margin-left');
-        rowGender.appendChild(characterGender);
-
-        rowLocation = document.createElement('div');
-        rowLocation.setAttribute('class', 'row');
-        columnFull.appendChild(rowLocation);
-
-        characterLocation = document.createElement('h2');
-        characterLocation.textContent = 'Location: ' + characterData[j].location.name;
-        characterLocation.setAttribute('class', 'margin-left');
-        rowLocation.appendChild(characterLocation);
-
-        rowEpisodes = document.createElement('div');
-        rowEpisodes.setAttribute('class', 'row');
-        columnFull.appendChild(rowEpisodes);
-
-        episodesText = document.createElement('h2');
-        episodesText.textContent = 'Episodes:  ';
-        episodesText.setAttribute('class', 'margin-left');
-        rowEpisodes.appendChild(episodesText);
-
-        characterEpisode = document.createElement('h2');
-        for (l = 0; l < characterData[j].episode.length; l++) {
-          if (l === characterData[j].episode.length - 1) {
-            characterEpisode.textContent += characterData[j].episode[l].slice(40);
-          } else {
-            characterEpisode.textContent += characterData[j].episode[l].slice(40) + ', ';
-          }
-          characterEpisode.setAttribute('class', 'margin-left');
-          rowEpisodes.appendChild(characterEpisode);
-        }
-        styleDocument.replaceWith(styleReplace);
       }
+      heart.addEventListener('click', function () {
+        data.bookmarkEntries.push(characterObject);
+      });
+      heart.setAttribute('id', 'heart-information');
+      rowName.appendChild(heart);
+
+      rowStatus = document.createElement('div');
+      rowStatus.setAttribute('class', 'row');
+      columnFull.appendChild(rowStatus);
+
+      characterStatus = document.createElement('h2');
+      characterStatus.textContent = 'Status: ' + xhrResponse.status;
+      characterStatus.setAttribute('class', 'margin-left');
+      rowStatus.appendChild(characterStatus);
+
+      rowSpecies = document.createElement('div');
+      rowSpecies.setAttribute('class', 'row');
+      columnFull.appendChild(rowSpecies);
+
+      characterSpecies = document.createElement('h2');
+      characterSpecies.textContent = 'Species: ' + xhrResponse.species;
+      characterSpecies.setAttribute('class', 'margin-left');
+      rowSpecies.appendChild(characterSpecies);
+
+      rowGender = document.createElement('div');
+      rowGender.setAttribute('class', 'row');
+      columnFull.appendChild(rowGender);
+
+      characterGender = document.createElement('h2');
+      characterGender.textContent = 'Gender: ' + xhrResponse.gender;
+      characterGender.setAttribute('class', 'margin-left');
+      rowGender.appendChild(characterGender);
+
+      rowLocation = document.createElement('div');
+      rowLocation.setAttribute('class', 'row');
+      columnFull.appendChild(rowLocation);
+
+      characterLocation = document.createElement('h2');
+      characterLocation.textContent = 'Location: ' + xhrResponse.location.name;
+      characterLocation.setAttribute('class', 'margin-left');
+      rowLocation.appendChild(characterLocation);
+
+      rowEpisodes = document.createElement('div');
+      rowEpisodes.setAttribute('class', 'row');
+      columnFull.appendChild(rowEpisodes);
+
+      episodesText = document.createElement('h2');
+      episodesText.textContent = 'Episodes:  ';
+      episodesText.setAttribute('class', 'margin-left');
+      rowEpisodes.appendChild(episodesText);
+
+      characterEpisode = document.createElement('h2');
+      for (l = 0; l < xhrResponse.episode.length; l++) {
+        if (l === xhrResponse.episode.length - 1) {
+          characterEpisode.textContent += xhrResponse.episode[l].slice(40);
+        } else {
+          characterEpisode.textContent += xhrResponse.episode[l].slice(40) + ', ';
+        }
+        characterEpisode.setAttribute('class', 'margin-left');
+        rowEpisodes.appendChild(characterEpisode);
+      }
+      styleDocument.replaceWith(styleReplace);
     }
   }
 }
 
 characterList.addEventListener('click', function () {
-  characterInformationReturn(viewCharacters, xhr.response.results);
+  for (var i = 0; i < xhr.response.results.length; i++) {
+    characterInformationReturn(viewCharacters, xhr.response.results[i]);
+  }
 });
 
 navbar.addEventListener('click', function () {
@@ -279,13 +277,13 @@ navbar.addEventListener('click', function () {
   }
 });
 
-function episodeDiv(season, characterData, start, end) {
+function episodeDiv(season, xhrResponse, start, end) {
   for (var m = start; m < end; m++) {
     var episodesRow = document.createElement('div');
     episodesRow.setAttribute('class', 'season row');
     season.appendChild(episodesRow);
     var episodes = document.createElement('a');
-    episodes.textContent = 'Episode ' + characterData.response.results[m].id + ': ' + characterData.response.results[m].name;
+    episodes.textContent = 'Episode ' + xhrResponse.response.results[m].id + ': ' + xhrResponse.response.results[m].name;
     episodesRow.appendChild(episodes);
   }
 }
@@ -433,13 +431,19 @@ window.addEventListener('click', function () {
 
 navBookmarks.addEventListener('click', function () {
   bookmarks.innerHTML = '';
-  createCharacterImageCard(data.bookmarkEntries, bookmarks, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-solid fa-heart');
+  for (var i = 0; i < data.bookmarkEntries.length; i++) {
+    createCharacterImageCard(data.bookmarkEntries[i], bookmarks, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-solid fa-heart');
+  }
 });
 
 episodeByCharacters.addEventListener('click', function () {
-  characterInformationReturn(viewCharacterByEpisode, data.charactersByEpisodes);
+  for (var i = 0; i < data.charactersByEpisodes.length; i++) {
+    characterInformationReturn(viewCharacterByEpisode, data.charactersByEpisodes[i]);
+  }
 });
 
 bookmarks.addEventListener('click', function () {
-  characterInformationReturn(viewBookmarks, data.bookmarkEntries);
+  for (var i = 0; i < data.bookmarkEntries.length; i++) {
+    characterInformationReturn(viewBookmarks, data.bookmarkEntries[i]);
+  }
 });
