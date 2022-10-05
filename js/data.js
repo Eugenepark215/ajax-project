@@ -1,7 +1,7 @@
 /* exported data */
 var data = {
   view: 'all-characters',
-  characterDomReturn: [],
+  characterInformationDomReturn: [],
   episodesPages: [],
   bookmarkEntries: [],
   charactersByEpisodes: []
