@@ -155,67 +155,37 @@ function characterInformationDomReturn(xhrResponse) {
   return style;
 }
 
-characterList.addEventListener('click', function () {
+function characterInformationShow(dataView, xhrResponse) {
   if (event.target.tagName === 'IMG' && !characterInformation.hasChildNodes()) {
-    viewCharacters.setAttribute('class', 'view hidden');
+    dataView.setAttribute('class', 'view hidden');
     characterInformation.setAttribute('class', 'view active');
-    for (var i = 0; i < xhr.response.results.length; i++) {
-      if (xhr.response.results[i].image === event.target.src) {
-        characterInformation.appendChild(characterInformationDomReturn(xhr.response.results[i]));
+    for (var i = 0; i < xhrResponse.length; i++) {
+      if (xhrResponse[i].image === event.target.src) {
+        characterInformation.appendChild(characterInformationDomReturn(xhrResponse[i]));
       }
     }
   } else if (event.target.tagName === 'IMG' && characterInformation.hasChildNodes()) {
-    viewCharacters.setAttribute('class', 'view hidden');
+    dataView.setAttribute('class', 'view hidden');
     characterInformation.setAttribute('class', 'view active');
     var styleReplace = document.querySelector('#style-information');
-    for (var j = 0; j < xhr.response.results.length; j++) {
-      if (xhr.response.results[j].image === event.target.src) {
-        styleReplace.replaceWith(characterInformationDomReturn(xhr.response.results[j]));
+    for (var j = 0; j < xhrResponse.length; j++) {
+      if (xhrResponse[j].image === event.target.src) {
+        styleReplace.replaceWith(characterInformationDomReturn(xhrResponse[j]));
       }
     }
   }
+}
+
+characterList.addEventListener('click', function () {
+  characterInformationShow(viewCharacters, xhr.response.results);
 });
 
 episodeByCharacters.addEventListener('click', function () {
-  if (event.target.tagName === 'IMG' && !characterInformation.hasChildNodes()) {
-    viewCharacterByEpisode.setAttribute('class', 'view hidden');
-    characterInformation.setAttribute('class', 'view active');
-    for (var i = 0; i < data.charactersByEpisodes.length; i++) {
-      if (data.charactersByEpisodes[i].image === event.target.src) {
-        characterInformation.appendChild(characterInformationDomReturn(data.charactersByEpisodes[i]));
-      }
-    }
-  } else if (event.target.tagName === 'IMG' && characterInformation.hasChildNodes()) {
-    viewCharacterByEpisode.setAttribute('class', 'view hidden');
-    characterInformation.setAttribute('class', 'view active');
-    var styleReplace = document.querySelector('#style-information');
-    for (var j = 0; j < data.charactersByEpisodes.length; j++) {
-      if (data.charactersByEpisodes[j].image === event.target.src) {
-        styleReplace.replaceWith(characterInformationDomReturn(data.charactersByEpisodes[j]));
-      }
-    }
-  }
+  characterInformationShow(viewCharacterByEpisode, data.charactersByEpisodes);
 });
 
 bookmarks.addEventListener('click', function () {
-  if (event.target.tagName === 'IMG' && !characterInformation.hasChildNodes()) {
-    viewBookmarks.setAttribute('class', 'view hidden');
-    characterInformation.setAttribute('class', 'view active');
-    for (var i = 0; i < data.bookmarkEntries.length; i++) {
-      if (data.bookmarkEntries[i].image === event.target.src) {
-        characterInformation.appendChild(characterInformationDomReturn(data.bookmarkEntries[i]));
-      }
-    }
-  } else if (event.target.tagName === 'IMG' && characterInformation.hasChildNodes()) {
-    viewBookmarks.setAttribute('class', 'view hidden');
-    characterInformation.setAttribute('class', 'view active');
-    var styleReplace = document.querySelector('#style-information');
-    for (var j = 0; j < data.bookmarkEntries.length; j++) {
-      if (data.bookmarkEntries[j].image === event.target.src) {
-        styleReplace.replaceWith(characterInformationDomReturn(data.bookmarkEntries[j]));
-      }
-    }
-  }
+  characterInformationShow(viewBookmarks, data.bookmarkEntries);
 });
 
 navbar.addEventListener('click', function () {
