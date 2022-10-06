@@ -37,7 +37,13 @@
   </header>
   <main>
     <div class="container">
+      <div class="transparent hidden" id="error-message">
+        <div class="column">
+          <h1>Sorry, there was an error connecting to the network! Please check your internet connection and try again.</h1>
+        </div>
+      </div>
       <div data-view="all-characters" id="view-characters" class="view active">
+        <div class="lds-ripple"><div></div><div></div></div>
         <div class="row justify-center">
           <h1>All Characters</h1>
         </div>
@@ -45,6 +51,7 @@
       </div>
       <div data-view="character-information" id="character-information-detail" class="view hidden"></div>
       <div data-view="episode-directory" id="episode-directory" class="justify-center view hidden">
+        <div class="lds-ripple"><div></div><div></div></div>
         <div id="episode-list" class="column-half border-radius white-background justify-center">
           <div class="row justify-center">
             <h1 id="episode-directory-title">Episode Directory</h1>
@@ -74,12 +81,13 @@
             <div id="season5" class="season series season5 hidden">
             </div>
           </div>
-          <div class="row justify-center" >
+          <div class="row justify-center">
             <div id="bottom"></div>
           </div>
         </div>
       </div>
       <div id="view-character-by-episode" class="view hidden">
+        <div class="lds-ripple"><div></div><div></div></div>
         <div class="row justify-center">
           <h1 id="episode-heading"></h1>
         </div>
