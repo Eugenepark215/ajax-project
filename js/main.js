@@ -63,7 +63,9 @@ xhr.addEventListener('load', function () {
     loader[0].setAttribute('class', 'hidden');
   }
   for (var i = 0; i < xhr.response.results.length; i++) {
-    characterList.appendChild(createCharacterImageCard(xhr.response.results[i], characterList, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-regular fa-heart'));
+    if (xhr.response.results[i].id !== 7 && xhr.response.results[i].id !== 20) {
+      characterList.appendChild(createCharacterImageCard(xhr.response.results[i], characterList, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-regular fa-heart'));
+    }
   }
 });
 xhr.send();
