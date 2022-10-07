@@ -141,6 +141,7 @@ button {
   width: 100%;
   border-top: 1px solid;
   border-bottom: 1px solid;
+  color: black;
 }
 
 button:hover {
@@ -172,8 +173,9 @@ a:hover {
   text-align: center;
 }
 
-#character-information-detail {
-  margin-left: 8%;
+#style-information {
+  display: flex;
+  justify-content: center;
 }
 
 .image {
@@ -276,6 +278,11 @@ h2 {
     font-size: x-large;
   }
 
+  #style-information {
+    display: flex;
+    justify-content: center;
+  }
+
   .fa-regular,
   .fa-solid,
   #heart-information {
@@ -315,10 +322,6 @@ h2 {
 
   h2 {
     font-size: xx-large;
-  }
-
-  #character-information-detail {
-    margin-left: 20%;
   }
 
   #portal-bookmark-text {
@@ -403,7 +406,8 @@ h2 {
   }
 
   #style-information {
-    padding-left: 15%;
+    display: flex;
+    justify-content: center;
   }
 
   #column-for-information {

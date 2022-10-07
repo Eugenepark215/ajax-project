@@ -343,15 +343,30 @@ episodeDirectory.addEventListener('click', function () {
   }
 });
 
-window.addEventListener('click', function () {
+navBookmarks.addEventListener('click', function () {
+  bookmarks.innerHTML = '';
+  for (var i = 0; i < data.bookmarkEntries.length; i++) {
+    bookmarks.appendChild(createCharacterImageCard(data.bookmarkEntries[i], bookmarks, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-solid fa-heart'));
+  }
+});
+function clickPortal() {
   for (var i = 0; i < portal.length; i++) {
-    if (event.target.src === 'http://localhost:5500/images/sticker_2060-512x512.png') {
+    if (event.target.src.includes('images/sticker_2060-512x512.png')) {
       viewCharacterByEpisode.setAttribute('class', 'view hidden');
       viewBookmarks.setAttribute('class', 'view hidden');
       episodeDirectory.setAttribute('class', 'view active');
     }
-
   }
+}
+viewCharacterByEpisode.addEventListener('click', function () {
+  clickPortal();
+});
+
+placeHolderBookmark.addEventListener('click', function () {
+  clickPortal();
+});
+
+function clickHeartIcon() {
   var allCharacters = document.querySelectorAll('.all-characters');
   if (event.target.tagName === 'I' && event.target.closest('.flex-basis') !== null) {
     event.target.className = 'fa-solid fa-heart';
@@ -370,11 +385,16 @@ window.addEventListener('click', function () {
       }
     }
   }
+}
+
+characterList.addEventListener('click', function () {
+  clickHeartIcon();
 });
 
-navBookmarks.addEventListener('click', function () {
-  bookmarks.innerHTML = '';
-  for (var i = 0; i < data.bookmarkEntries.length; i++) {
-    bookmarks.appendChild(createCharacterImageCard(data.bookmarkEntries[i], bookmarks, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-solid fa-heart'));
-  }
+characterInformation.addEventListener('click', function () {
+  clickHeartIcon();
+});
+
+episodeByCharacters.addEventListener('click', function () {
+  clickHeartIcon();
 });
