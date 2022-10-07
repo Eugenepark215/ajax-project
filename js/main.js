@@ -17,6 +17,8 @@ var season3 = document.querySelector('#season3');
 var season4 = document.querySelector('#season4');
 var season5 = document.querySelector('#season5');
 var series = document.querySelectorAll('.series');
+var loader = document.querySelectorAll('.lds-ripple');
+var errorMessage = document.querySelector('#error-message');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://rickandmortyapi.com/api/character');
@@ -54,6 +56,12 @@ function createCharacterImageCard(xhrResponse, element, classSelector, columnTyp
 }
 
 xhr.addEventListener('load', function () {
+  if (xhr.status !== 404) {
+    loader[0].setAttribute('class', 'hidden');
+  } else {
+    errorMessage.setAttribute('class', 'transparent');
+    loader[0].setAttribute('class', 'hidden');
+  }
   for (var i = 0; i < xhr.response.results.length; i++) {
     characterList.appendChild(createCharacterImageCard(xhr.response.results[i], characterList, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-regular fa-heart'));
   }
@@ -216,6 +224,12 @@ function loadAndShowEpisodeList(url, index) {
   newXHRPage.open('GET', url);
   newXHRPage.responseType = 'json';
   newXHRPage.addEventListener('load', function () {
+    if (newXHRPage.status !== 404) {
+      loader[1].setAttribute('class', 'hidden');
+    } else {
+      errorMessage.setAttribute('class', 'transparent');
+      loader[1].setAttribute('class', 'hidden');
+    }
     data.episodesPages.push(newXHRPage.response.results);
     if (index === 0) {
       episodeDiv(season1, newXHRPage, 0, 11);
@@ -259,6 +273,12 @@ function createXHR(url) {
   newXHR.open('GET', url);
   newXHR.responseType = 'json';
   newXHR.addEventListener('load', function () {
+    if (newXHR.status !== 404) {
+      loader[2].setAttribute('class', 'hidden');
+    } else {
+      errorMessage.setAttribute('class', 'transparent');
+      loader[2].setAttribute('class', 'hidden');
+    }
     var characterObject = newXHR.response;
     var styleDocument = document.createElement('div');
     styleDocument.setAttribute('class', 'flex-basis justify-center padding');
@@ -323,15 +343,30 @@ episodeDirectory.addEventListener('click', function () {
   }
 });
 
-window.addEventListener('click', function () {
+navBookmarks.addEventListener('click', function () {
+  bookmarks.innerHTML = '';
+  for (var i = 0; i < data.bookmarkEntries.length; i++) {
+    bookmarks.appendChild(createCharacterImageCard(data.bookmarkEntries[i], bookmarks, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-solid fa-heart'));
+  }
+});
+function clickPortal() {
   for (var i = 0; i < portal.length; i++) {
-    if (event.target.src === 'http://localhost:5500/images/sticker_2060-512x512.png') {
+    if (event.target.src.includes('images/sticker_2060-512x512.png')) {
       viewCharacterByEpisode.setAttribute('class', 'view hidden');
       viewBookmarks.setAttribute('class', 'view hidden');
       episodeDirectory.setAttribute('class', 'view active');
     }
-
   }
+}
+viewCharacterByEpisode.addEventListener('click', function () {
+  clickPortal();
+});
+
+placeHolderBookmark.addEventListener('click', function () {
+  clickPortal();
+});
+
+function clickHeartIcon() {
   var allCharacters = document.querySelectorAll('.all-characters');
   if (event.target.tagName === 'I' && event.target.closest('.flex-basis') !== null) {
     event.target.className = 'fa-solid fa-heart';
@@ -350,11 +385,16 @@ window.addEventListener('click', function () {
       }
     }
   }
+}
+
+characterList.addEventListener('click', function () {
+  clickHeartIcon();
 });
 
-navBookmarks.addEventListener('click', function () {
-  bookmarks.innerHTML = '';
-  for (var i = 0; i < data.bookmarkEntries.length; i++) {
-    bookmarks.appendChild(createCharacterImageCard(data.bookmarkEntries[i], bookmarks, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-solid fa-heart'));
-  }
+characterInformation.addEventListener('click', function () {
+  clickHeartIcon();
+});
+
+episodeByCharacters.addEventListener('click', function () {
+  clickHeartIcon();
 });

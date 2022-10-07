@@ -37,14 +37,21 @@
   </header>
   <main>
     <div class="container">
+      <div class="transparent hidden" id="error-message">
+        <div class="column">
+          <h1>Sorry, there was an error connecting to the network! Please check your internet connection and try again.</h1>
+        </div>
+      </div>
       <div data-view="all-characters" id="view-characters" class="view active">
+        <div class="lds-ripple"><div></div><div></div></div>
         <div class="row justify-center">
           <h1>All Characters</h1>
         </div>
         <div class="row flex-wrap" id="character-list"></div>
       </div>
-      <div data-view="character-information" id="character-information-detail" class="view"></div>
+      <div data-view="character-information" id="character-information-detail" class="view hidden"></div>
       <div data-view="episode-directory" id="episode-directory" class="justify-center view hidden">
+        <div class="lds-ripple"><div></div><div></div></div>
         <div id="episode-list" class="column-half border-radius white-background justify-center">
           <div class="row justify-center">
             <h1 id="episode-directory-title">Episode Directory</h1>
@@ -74,18 +81,19 @@
             <div id="season5" class="season series season5 hidden">
             </div>
           </div>
-          <div class="row justify-center" >
+          <div class="row justify-center">
             <div id="bottom"></div>
           </div>
         </div>
       </div>
       <div id="view-character-by-episode" class="view hidden">
+        <div class="lds-ripple"><div></div><div></div></div>
         <div class="row justify-center">
           <h1 id="episode-heading"></h1>
         </div>
         <div id="characters-by-episode" class="row flex-wrap"></div>
         <div class="row flex-direction-column justify-center">
-          <a class="portal-link"><img class="portal" src="images/sticker_2060-512x512.png"></a>
+          <a class="portal-link"><img class="portal" id="portal-directory" src="images/sticker_2060-512x512.png"></a>
           <p class="portal-text">Go into the portal to get back<br>
           </br> to the Episode Directory dimension!</p>
         </div>
@@ -96,7 +104,7 @@
         </div>
         <div id="bookmarks" class="row flex-wrap"></div>
         <div id="place-holder-bookmark" class="row flex-direction-column justify-center">
-          <a class="portal-link"><img class="portal" id="portal" src="images/sticker_2060-512x512.png"></a>
+          <a class="portal-link"><img class="portal" id="portal-bookmark" src="images/sticker_2060-512x512.png"></a>
           <p id="portal-bookmark-text">No characters here! <br>
           </br>Go into the portal and get to squanching!</p>
         </div>
