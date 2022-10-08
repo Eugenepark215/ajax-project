@@ -1,6 +1,7 @@
 header {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .container {
@@ -20,8 +21,8 @@ header {
   width: 75%;
 }
 
-.column-third {
-  width: calc(100%/3);
+.column-fourth {
+  width: calc(100%/4);
 }
 
 .column-half {

@@ -17,15 +17,14 @@ var season3 = document.querySelector('#season3');
 var season4 = document.querySelector('#season4');
 var season5 = document.querySelector('#season5');
 var series = document.querySelectorAll('.series');
-var loader = document.querySelectorAll('.lds-ripple');
+var loader = document.querySelector('.lds-ripple');
 var errorMessage = document.querySelector('#error-message');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://rickandmortyapi.com/api/character');
 xhr.responseType = 'json';
 
-function createCharacterImageCard(xhrResponse, element, classSelector, columnType, heartClassSelector) {
-  const characterObject = xhrResponse;
+function createCharacterImageCard(xhrResponse, element, classSelector, columnType) {
   var style = document.createElement('div');
   style.setAttribute('class', classSelector);
 
@@ -38,34 +37,25 @@ function createCharacterImageCard(xhrResponse, element, classSelector, columnTyp
   characterImage.setAttribute('class', 'image');
   column.appendChild(characterImage);
 
-  var rowNameAndHeart = document.createElement('div');
-  rowNameAndHeart.setAttribute('class', 'row justify-space-around');
-  column.appendChild(rowNameAndHeart);
+  var row = document.createElement('div');
+  row.setAttribute('class', 'row justify-space-around');
+  column.appendChild(row);
   var characterName = document.createElement('p');
   characterName.setAttribute('class', 'character-name');
   characterName.textContent = xhrResponse.name;
-  rowNameAndHeart.appendChild(characterName);
-
-  var heart = document.createElement('i');
-  heart.setAttribute('class', heartClassSelector);
-  heart.addEventListener('click', function () {
-    data.bookmarkEntries.push(characterObject);
-  });
-  rowNameAndHeart.appendChild(heart);
+  row.appendChild(characterName);
   return style;
 }
 
 xhr.addEventListener('load', function () {
-  if (xhr.status !== 404) {
-    loader[0].setAttribute('class', 'hidden');
+  if (xhr.status < 300) {
+    loader.setAttribute('class', 'hidden');
   } else {
     errorMessage.setAttribute('class', 'transparent');
-    loader[0].setAttribute('class', 'hidden');
+    loader.setAttribute('class', 'hidden');
   }
   for (var i = 0; i < xhr.response.results.length; i++) {
-    if (xhr.response.results[i].id !== 7 && xhr.response.results[i].id !== 20) {
-      characterList.appendChild(createCharacterImageCard(xhr.response.results[i], characterList, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-regular fa-heart'));
-    }
+    characterList.appendChild(createCharacterImageCard(xhr.response.results[i], characterList, 'all-characters flex-basis justify-center padding', 'column-three-fourths'));
   }
 });
 xhr.send();
@@ -226,11 +216,11 @@ function loadAndShowEpisodeList(url, index) {
   newXHRPage.open('GET', url);
   newXHRPage.responseType = 'json';
   newXHRPage.addEventListener('load', function () {
-    if (newXHRPage.status !== 404) {
-      loader[1].setAttribute('class', 'hidden');
+    if (newXHRPage.status < 300) {
+      loader.setAttribute('class', 'hidden');
     } else {
       errorMessage.setAttribute('class', 'transparent');
-      loader[1].setAttribute('class', 'hidden');
+      loader.setAttribute('class', 'hidden');
     }
     data.episodesPages.push(newXHRPage.response.results);
     if (index === 0) {
@@ -275,11 +265,11 @@ function createXHR(url) {
   newXHR.open('GET', url);
   newXHR.responseType = 'json';
   newXHR.addEventListener('load', function () {
-    if (newXHR.status !== 404) {
-      loader[2].setAttribute('class', 'hidden');
+    if (newXHR.status < 300) {
+      loader.setAttribute('class', 'hidden');
     } else {
       errorMessage.setAttribute('class', 'transparent');
-      loader[2].setAttribute('class', 'hidden');
+      loader.setAttribute('class', 'hidden');
     }
     var characterObject = newXHR.response;
     var styleDocument = document.createElement('div');
@@ -296,27 +286,15 @@ function createXHR(url) {
     characterImage.setAttribute('class', 'image');
     columnThreeFourths.appendChild(characterImage);
 
-    var rowNameAndHeart = document.createElement('div');
-    rowNameAndHeart.setAttribute('class', 'row justify-space-around');
-    columnThreeFourths.appendChild(rowNameAndHeart);
+    var row = document.createElement('div');
+    row.setAttribute('class', 'row justify-space-around');
+    columnThreeFourths.appendChild(row);
 
     var characterName = document.createElement('p');
     characterName.setAttribute('class', 'character-name');
     characterName.textContent = newXHR.response.name;
-    rowNameAndHeart.appendChild(characterName);
+    row.appendChild(characterName);
 
-    var heart = document.createElement('i');
-    heart.setAttribute('class', 'fa-regular fa-heart');
-    for (var z = 0; z < data.bookmarkEntries.length; z++) {
-      if (characterName.textContent === data.bookmarkEntries[z].name && characterImage.src === data.bookmarkEntries[z].image) {
-        heart.setAttribute('class', 'fa-solid fa-heart');
-      }
-    }
-    heart.addEventListener('click', function () {
-      data.bookmarkEntries.push(characterObject);
-    });
-    heart.setAttribute('id', 'heart-information');
-    rowNameAndHeart.appendChild(heart);
     data.charactersByEpisodes.push(characterObject);
   });
   newXHR.send();
@@ -348,7 +326,7 @@ episodeDirectory.addEventListener('click', function () {
 navBookmarks.addEventListener('click', function () {
   bookmarks.innerHTML = '';
   for (var i = 0; i < data.bookmarkEntries.length; i++) {
-    bookmarks.appendChild(createCharacterImageCard(data.bookmarkEntries[i], bookmarks, 'all-characters flex-basis justify-center padding', 'column-three-fourths', 'fa-solid fa-heart'));
+    bookmarks.appendChild(createCharacterImageCard(data.bookmarkEntries[i], bookmarks, 'all-characters flex-basis justify-center padding', 'column-three-fourths'));
   }
 });
 function clickPortal() {
