@@ -23,97 +23,114 @@
     referrerpolicy="no-referrer" />
 </head>
 <body>
-  <header>
-    <div class="row justify-center flex-direction-column">
-      <img id="logo" src="images/Rick_and_Morty.svg">
-      <div class="navbar row">
-        <div class="column-third text-align">
-          <a class="nav" data-view="all-characters" id="nav-character">ALL CHARACTERS</a>
+  <main>
+    <header>
+      <div class="row justify-center navbar">
+        <div class="column-fourth margin-left">
+          <img id="logo" src="images/Rick_and_Morty.svg">
         </div>
-        <div class="column-third text-align">
-          <a class="nav" data-view="episode-directory" id="nav-episode">EPISODE DIRECTORY</a>
+        <div class="column-fourth text-align">
+          <a class="nav cursor" data-view="all-characters" id="nav-character">ALL CHARACTERS</a>
         </div>
-        <div class="column-third text-align">
-          <a class="nav" data-view="bookmarks" id="nav-bookmarks">BOOKMARKS</a>
+        <div class="column-fourth text-align">
+          <a class="nav cursor" data-view="episode-directory" id="nav-episode">EPISODE DIRECTORY</a>
+        </div>
+        <div class="column-fourth text-align">
+          <a class="nav cursor" data-view="bookmarks" id="nav-bookmarks">BOOKMARKS</a>
         </div>
       </div>
-    </div>
-  </header>
-  <main>
+    </header>
     <div class="container">
       <div class="transparent hidden" id="error-message">
-        <div class="column">
-          <h1>Sorry, there was an error connecting to the network! Please check your internet connection and try again.</h1>
+        <div class="modal-container">
+          <h1 class="title-header">Sorry, there was an error connecting to the network! Please check your internet connection and try again.</h1>
         </div>
       </div>
       <div data-view="all-characters" id="view-characters" class="view active">
-        <div class="lds-ripple"><div></div><div></div></div>
         <div class="row justify-center">
-          <h1>All Characters</h1>
+          <div class="column-full">
+            <h1 class="title-header">All Characters</h1>
+          </div>
         </div>
         <div class="row flex-wrap" id="character-list"></div>
       </div>
       <div data-view="character-information" id="character-information-detail" class="view hidden"></div>
       <div data-view="episode-directory" id="episode-directory" class="justify-center view hidden">
-        <div class="lds-ripple"><div></div><div></div></div>
-        <div id="episode-list" class="column-half border-radius white-background justify-center">
+        <div id="episode-list" class="column-half border-radius-20px white-background justify-center">
           <div class="row justify-center">
-            <h1 id="episode-directory-title">Episode Directory</h1>
-          </div>
-          <div class="row justify-center flex-direction-column">
-            <button class="season1">Season 1 (episodes 1-11)</button>
-            <div id="season1" class="season series season1 hidden">
+            <div class="column-full">
+              <h1 class="title-header" id="episode-directory-title">Episode Directory</h1>
             </div>
           </div>
           <div class="row justify-center flex-direction-column">
-            <button class="season2">Season 2 (episodes 12-21)</button>
-            <div id="season2" class="season series season2 hidden">
+            <div class="column-full">
+              <button class="season1">Season 1 (episodes 1-11)</button>
+              <div id="season1" class="season series season1 hidden"></div>
             </div>
           </div>
           <div class="row justify-center flex-direction-column">
-            <button class="season3">Season 3 (episodes 22-31)</button>
-            <div id="season3" class="season series season3 hidden">
+            <div class="column-full">
+              <button class="season2">Season 2 (episodes 12-21)</button>
+              <div id="season2" class="season series season2 hidden"></div>
             </div>
           </div>
           <div class="row justify-center flex-direction-column">
-            <button class="season4">Season 4 (episodes 32-41)</button>
-            <div id="season4" class="season series season4 hidden">
+            <div class="column-full">
+              <button class="season3">Season 3 (episodes 22-31)</button>
+              <div id="season3" class="season series season3 hidden"></div>
             </div>
           </div>
           <div class="row justify-center flex-direction-column">
-            <button class="season5">Season 5 (episodes 42-51)</button>
-            <div id="season5" class="season series season5 hidden">
+            <div class="column-full">
+              <button class="season4">Season 4 (episodes 32-41)</button>
+              <div id="season4" class="season series season4 hidden"></div>
+            </div>
+          </div>
+          <div class="row justify-center flex-direction-column">
+            <div class="column-full">
+              <button class="season5">Season 5 (episodes 42-51)</button>
+              <div id="season5" class="season series season5 hidden"></div>
             </div>
           </div>
           <div class="row justify-center">
-            <div id="bottom"></div>
+            <div class="column-full">
+              <div class="bottom border-radius-20px"></div>
+            </div>
           </div>
         </div>
       </div>
       <div id="view-character-by-episode" class="view hidden">
-        <div class="lds-ripple"><div></div><div></div></div>
         <div class="row justify-center">
-          <h1 id="episode-heading"></h1>
+          <div class="column-full">
+            <h1 class="title-header" id="episode-heading"></h1>
+          </div>
         </div>
         <div id="characters-by-episode" class="row flex-wrap"></div>
         <div class="row flex-direction-column justify-center">
-          <a class="portal-link"><img class="portal" id="portal-directory" src="images/sticker_2060-512x512.png"></a>
-          <p class="portal-text">Go into the portal to get back<br>
+          <div class="column-full">
+            <a class="portal-link cursor"><img class="portal" id="portal-directory" src="images/sticker_2060-512x512.png"></a>
+            <p class="portal-text">Go into the portal to get back<br>
           </br> to the Episode Directory dimension!</p>
+          </div>
         </div>
       </div>
       <div id="view-bookmarks" data-view="bookmarks" class="view hidden">
         <div class="row justify-center">
-          <h1>Bookmarks</h1>
+          <div class="column-full">
+            <h1 class="title-header">Bookmarks</h1>
+          </div>
         </div>
         <div id="bookmarks" class="row flex-wrap"></div>
         <div id="place-holder-bookmark" class="row flex-direction-column justify-center">
-          <a class="portal-link"><img class="portal" id="portal-bookmark" src="images/sticker_2060-512x512.png"></a>
-          <p id="portal-bookmark-text">No characters here! <br>
+          <div class="column-full">
+            <a class="portal-link cursor"><img class="portal" id="portal-bookmark" src="images/sticker_2060-512x512.png"></a>
+            <p id="portal-bookmark-text">No characters here! <br>
           </br>Go into the portal and get to squanching!</p>
+          </div>
         </div>
       </div>
     </div>
+    <div class="lds-ripple"><div></div><div></div></div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

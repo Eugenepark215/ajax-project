@@ -29,7 +29,7 @@ function createCharacterImageCard(xhrResponse, element, classSelector, columnTyp
   style.setAttribute('class', classSelector);
 
   var column = document.createElement('div');
-  column.setAttribute('class', columnType + ' white-background border-radius');
+  column.setAttribute('class', columnType + ' white-background border-radius-20px');
   style.appendChild(column);
 
   var characterImage = document.createElement('img');
@@ -66,7 +66,7 @@ function characterInformationDomReturn(xhrResponse) {
   style.setAttribute('id', 'style-information');
 
   var columnFull = document.createElement('div');
-  columnFull.setAttribute('class', 'column-full white-background border-radius');
+  columnFull.setAttribute('class', 'column-full white-background border-radius-20px');
   columnFull.setAttribute('id', 'column-for-information');
   style.appendChild(columnFull);
 
@@ -207,6 +207,7 @@ function episodeDiv(season, xhrResponse, start, end) {
     season.appendChild(episodesRow);
     var episodes = document.createElement('a');
     episodes.textContent = 'Episode ' + xhrResponse.response.results[m].id + ': ' + xhrResponse.response.results[m].name;
+    episodes.setAttribute('class', 'cursor');
     episodesRow.appendChild(episodes);
   }
 }
@@ -251,9 +252,9 @@ var button = document.querySelectorAll('button');
 for (var k = 0; k < button.length; k++) {
   button[k].addEventListener('click', function () {
     for (var j = 0; j < series.length; j++) {
-      if (series[j].getAttribute('id').includes(event.target.className) && series[j].className.includes('active')) {
+      if (event.target.className.includes(series[j].getAttribute('id')) && series[j].className.includes('active')) {
         series[j].setAttribute('class', event.target.className + ' season series hidden');
-      } else if (series[j].getAttribute('id').includes(event.target.className) && series[j].className.includes('hidden')) {
+      } else if (event.target.className.includes(series[j].getAttribute('id')) && series[j].className.includes('hidden')) {
         series[j].setAttribute('class', event.target.className + ' season series active');
       }
     }

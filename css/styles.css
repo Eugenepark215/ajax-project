@@ -24,10 +24,6 @@ body {
   display: none;
 }
 
-.column-three-fourths > img {
-  cursor: pointer;
-}
-
 .justify-center {
   justify-content: center;
   align-items: center;
@@ -37,7 +33,7 @@ body {
   justify-content: space-around;
 }
 
-h1 {
+.title-header {
   text-align: center;
   font-size: x-large;
 }
@@ -58,12 +54,11 @@ h1 {
   background-color: white;
 }
 
-.border-radius {
+.border-radius-20px {
   border-radius: 20px;
 }
 
 .nav:hover {
-  cursor: pointer;
   background-color: black;
 }
 
@@ -79,7 +74,6 @@ h1 {
 button {
   border: none;
   background-color: white;
-  font-size: large;
   height: 4rem;
   width: 100%;
   border-top: 1px solid;
@@ -92,8 +86,7 @@ button:hover {
   background-color: lightgray;
 }
 
-#bottom {
-  border-radius: 0 0 20px 20px;
+.bottom {
   border-top: none;
   height: 4rem;
 }
@@ -107,7 +100,7 @@ button:hover {
   line-height: 2rem;
 }
 
-a:hover {
+.cursor {
   cursor: pointer;
 }
 
@@ -184,6 +177,7 @@ h2 {
 
 .column-three-fourths {
   width: 100%;
+  cursor: pointer;
 }
 
 #logo {
@@ -294,7 +288,7 @@ h2 {
     padding: 3%;
   }
 
-  h1 {
+  .title-header {
     font-size: xxx-large;
   }
 
@@ -416,7 +410,7 @@ h2 {
     width: 50%;
   }
 
-  h1 {
+  .title-header {
     margin-top: 3%;
   }
 
