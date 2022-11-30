@@ -5,7 +5,7 @@ A web application for Rick and Morty fans who want to bookmark and view their fa
 I built this project because I am a fan of the Rick and Morty series and wanted to share my appreciation for the series! I hope you become a fan as well! If you already are, get to squanching!
 
 ## Live Demo
-Try the application live at [eugenepark215.github.io/rick-and-morty-character-viewer/](eugenepark215.github.io/rick-and-morty-character-viewer/)
+Try the application live at https://eugenepark215.github.io/rick-and-morty-character-viewer/
 
 ## Technologies Used
 
