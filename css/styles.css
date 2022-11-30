@@ -159,6 +159,7 @@ button:hover {
   font-size: small;
   padding-bottom: 10px;
   text-decoration: none;
+  text-align: center;
 }
 
 #heart-information {
