@@ -19,11 +19,27 @@ var season5 = document.querySelector('#season5');
 var series = document.querySelectorAll('.series');
 var loader = document.querySelector('.lds-ripple');
 var errorMessage = document.querySelector('#error-message');
-var loadMoreButton = document.querySelector('.load-more');
+// var loadMoreButton = document.querySelector('.load-more');
 
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://rickandmortyapi.com/api/character');
+var i = 1;
+xhr.open('GET', `https://rickandmortyapi.com/api/character/?page=${i}`);
 xhr.responseType = 'json';
+
+// create function for load more button that will append the next page onto characterlist
+// if clickec i will increment, new xhr, new function call, and append
+
+// function idToNumber() {
+//   i++;
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', `https://rickandmortyapi.com/api/character/?page=${i}`);
+//   xhr.responseType = 'json';
+//   return xhr;
+// }
+
+// loadMoreButton.addEventListener('click', function () {
+
+// });
 
 function createCharacterImageCard(xhrResponse, element, classSelector, columnType) {
   var style = document.createElement('div');
@@ -60,19 +76,6 @@ xhr.addEventListener('load', function () {
   }
 });
 xhr.send();
-
-// function idToNumber() {
-//   var i = 1;
-//   i++;
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('GET', `https://rickandmortyapi.com/api/character/?page=${i}`);
-//   xhr.responseType = 'json';
-//   return xhr;
-// }
-
-loadMoreButton.addEventListener('click', function () {
-
-});
 
 function characterInformationDomReturn(xhrResponse) {
   var characterObject = xhrResponse;
