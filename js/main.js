@@ -30,7 +30,7 @@ function createCharacterImageCard(xhrResponse, element, classSelector, columnTyp
   style.setAttribute('class', classSelector);
 
   var column = document.createElement('div');
-  column.setAttribute('class', columnType + ' white-background border-radius-20px');
+  column.setAttribute('class', columnType + ' white-background border-radius-6px character-card');
   style.appendChild(column);
 
   var characterImage = document.createElement('img');
@@ -67,7 +67,7 @@ function characterInformationDomReturn(xhrResponse) {
   style.setAttribute('id', 'style-information');
 
   var columnFull = document.createElement('div');
-  columnFull.setAttribute('class', 'column-full white-background border-radius-20px');
+  columnFull.setAttribute('class', 'column-full white-background border-radius-6px character-card');
   columnFull.setAttribute('id', 'column-for-information');
   style.appendChild(columnFull);
 
@@ -280,7 +280,7 @@ function createXHR(url) {
     episodeByCharacters.appendChild(styleDocument);
 
     var columnThreeFourths = document.createElement('div');
-    columnThreeFourths.setAttribute('class', 'column-three-fourths white-background border-radius');
+    columnThreeFourths.setAttribute('class', 'column-three-fourths white-background border-radius-6px character-card');
     styleDocument.appendChild(columnThreeFourths);
 
     var characterImage = document.createElement('img');
