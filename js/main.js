@@ -39,7 +39,7 @@ function createCharacterImageCard(xhrResponse, element, classSelector, columnTyp
   column.appendChild(characterImage);
 
   var row = document.createElement('div');
-  row.setAttribute('class', 'row justify-space-around');
+  row.setAttribute('class', 'row justify-center');
   column.appendChild(row);
   var characterName = document.createElement('p');
   characterName.setAttribute('class', 'character-name');
@@ -78,7 +78,7 @@ function characterInformationDomReturn(xhrResponse) {
   columnFull.appendChild(characterImage);
 
   var rowName = document.createElement('div');
-  rowName.setAttribute('class', 'row justify-center');
+  rowName.setAttribute('class', 'row justify-center padding-horizontal');
   columnFull.appendChild(rowName);
 
   var characterName = document.createElement('h1');

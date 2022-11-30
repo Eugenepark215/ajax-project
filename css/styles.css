@@ -3,10 +3,6 @@ body {
   font-family: Ubuntu, sans-serif;
 }
 
-i:hover {
-  cursor: pointer;
-}
-
 .modal-container {
   display: flex;
   justify-content: center;
@@ -135,6 +131,11 @@ button:hover {
   margin-left: 10px;
 }
 
+.padding-horizontal {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 #episode-directory-title {
   padding-top: 3%;
   padding-bottom: 3%;
@@ -145,13 +146,11 @@ button:hover {
 }
 
 .fa-regular {
-  margin-top: 7%;
   cursor: pointer;
 }
 
 .fa-solid {
   color: rgb(24 255 19);
-  margin-top: 7%;
   cursor: pointer;
 }
 
@@ -165,7 +164,6 @@ button:hover {
 #heart-information {
   font-size: large;
   margin-left: 5%;
-  margin-bottom: 5%;
 }
 
 h2 {
@@ -289,10 +287,6 @@ h2 {
   .fa-solid,
   #heart-information {
     font-size: xx-large;
-  }
-
-  #heart-information {
-    margin-bottom: 7%;
   }
 
   .padding {
