@@ -30,7 +30,7 @@ function createCharacterImageCard(xhrResponse, element, classSelector, columnTyp
   style.setAttribute('class', classSelector);
 
   var column = document.createElement('div');
-  column.setAttribute('class', columnType + ' white-background border-radius-20px');
+  column.setAttribute('class', columnType + ' white-background border-radius-6px character-card');
   style.appendChild(column);
 
   var characterImage = document.createElement('img');
@@ -39,7 +39,7 @@ function createCharacterImageCard(xhrResponse, element, classSelector, columnTyp
   column.appendChild(characterImage);
 
   var row = document.createElement('div');
-  row.setAttribute('class', 'row justify-space-around');
+  row.setAttribute('class', 'row justify-center');
   column.appendChild(row);
   var characterName = document.createElement('p');
   characterName.setAttribute('class', 'character-name');
@@ -67,7 +67,7 @@ function characterInformationDomReturn(xhrResponse) {
   style.setAttribute('id', 'style-information');
 
   var columnFull = document.createElement('div');
-  columnFull.setAttribute('class', 'column-full white-background border-radius-20px');
+  columnFull.setAttribute('class', 'column-full white-background border-radius-6px character-card');
   columnFull.setAttribute('id', 'column-for-information');
   style.appendChild(columnFull);
 
@@ -78,7 +78,7 @@ function characterInformationDomReturn(xhrResponse) {
   columnFull.appendChild(characterImage);
 
   var rowName = document.createElement('div');
-  rowName.setAttribute('class', 'row justify-center');
+  rowName.setAttribute('class', 'row justify-center padding-horizontal');
   columnFull.appendChild(rowName);
 
   var characterName = document.createElement('h1');
@@ -280,7 +280,7 @@ function createXHR(url) {
     episodeByCharacters.appendChild(styleDocument);
 
     var columnThreeFourths = document.createElement('div');
-    columnThreeFourths.setAttribute('class', 'column-three-fourths white-background border-radius');
+    columnThreeFourths.setAttribute('class', 'column-three-fourths white-background border-radius-6px character-card');
     styleDocument.appendChild(columnThreeFourths);
 
     var characterImage = document.createElement('img');
@@ -361,11 +361,6 @@ function clickHeartIcon() {
   } else if (event.target.tagName === 'I' && event.target.closest('#style-information') !== null) {
     event.target.className = 'fa-solid fa-heart';
     placeHolderBookmark.setAttribute('class', 'hidden');
-    for (var k = 0; k < allCharacters.length; k++) {
-      if (allCharacters[k].children[0].children[0].src === event.target.closest('#style-information').children[0].children[0].src) {
-        allCharacters[k].children[0].children[1].children[1].setAttribute('class', 'fa-solid fa-heart');
-      }
-    }
   }
 }
 

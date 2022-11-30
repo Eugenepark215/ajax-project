@@ -3,10 +3,6 @@ body {
   font-family: Ubuntu, sans-serif;
 }
 
-i:hover {
-  cursor: pointer;
-}
-
 .modal-container {
   display: flex;
   justify-content: center;
@@ -56,6 +52,10 @@ i:hover {
 
 .white-background {
   background-color: white;
+}
+
+.border-radius-6px {
+  border-radius: 6px;
 }
 
 .border-radius-20px {
@@ -121,11 +121,19 @@ button:hover {
 
 .image {
   width: 100%;
-  border-radius: 20px 20px 0 0;
+}
+
+.character-card {
+  overflow: hidden;
 }
 
 .margin-left {
   margin-left: 10px;
+}
+
+.padding-horizontal {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #episode-directory-title {
@@ -138,13 +146,11 @@ button:hover {
 }
 
 .fa-regular {
-  margin-top: 7%;
   cursor: pointer;
 }
 
 .fa-solid {
   color: rgb(24 255 19);
-  margin-top: 7%;
   cursor: pointer;
 }
 
@@ -153,12 +159,12 @@ button:hover {
   font-size: small;
   padding-bottom: 10px;
   text-decoration: none;
+  text-align: center;
 }
 
 #heart-information {
   font-size: large;
   margin-left: 5%;
-  margin-bottom: 5%;
 }
 
 h2 {
@@ -282,10 +288,6 @@ h2 {
   .fa-solid,
   #heart-information {
     font-size: xx-large;
-  }
-
-  #heart-information {
-    margin-bottom: 7%;
   }
 
   .padding {
