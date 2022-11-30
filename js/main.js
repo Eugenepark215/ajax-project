@@ -361,11 +361,6 @@ function clickHeartIcon() {
   } else if (event.target.tagName === 'I' && event.target.closest('#style-information') !== null) {
     event.target.className = 'fa-solid fa-heart';
     placeHolderBookmark.setAttribute('class', 'hidden');
-    for (var k = 0; k < allCharacters.length; k++) {
-      if (allCharacters[k].children[0].children[0].src === event.target.closest('#style-information').children[0].children[0].src) {
-        allCharacters[k].children[0].children[1].children[1].setAttribute('class', 'fa-solid fa-heart');
-      }
-    }
   }
 }
 
